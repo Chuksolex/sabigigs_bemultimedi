@@ -1,0 +1,53 @@
+.login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    form {
+      width: 360px;
+      padding: 100px 0px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+  
+      h1 {
+        color: #2c78ba;
+        margin-bottom: 20px;
+        font-size: 2.2rem;
+      }
+  
+      label {
+        color: gray;
+        font-size: 1.8rem;
+      }
+  
+      input,
+      textarea {
+        padding: 20px;
+        border: 1px solid rgb(216, 214, 214);
+        font-size: 1.8rem;
+      }
+  
+      button {
+        border: none;
+        padding: 20px;
+        color: white;
+        font-weight: 500;
+        font-size: 1.8rem;
+        background-color: #e36b09;
+        cursor: pointer;
+      }
+  
+      span{
+        color: red;
+        font-size: 1.2rem;
+      }
+    }
+  }
+/* color codes 
+#e36b09 orange
+#2c78ba blue
+H000000 black
+#aaaaaa grey1
+#bbbbbb grey2
+#cccccc grey3 */

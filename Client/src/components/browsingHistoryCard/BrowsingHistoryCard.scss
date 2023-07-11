@@ -1,0 +1,60 @@
+.historycard {
+  width: 200px;
+  height: 250px;
+  border: 1px solid rgb(228, 228, 228); 
+  border-radius: 10px;
+  display: flex;
+  cursor: pointer;
+  //margin: 20px;
+  flex-direction: column;
+
+  img {
+    width:200px;
+    height: 50%;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+
+    object-fit: cover;
+  }
+  .info {
+  
+    display: flex;
+    flex-direction: column;
+    gap: 10px;   
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    p {
+      color: #111;
+    }
+
+    .stars {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      img {
+        height: 14px;
+        width: 14px;
+      }
+
+      span {
+        font-size: 14px;
+        font-weight: bold;
+        color: #ffc108;
+      }
+    }
+  }
+
+  
+
+ 
+}
+
+/* color codes 
+#e36b09 orange
+#2c78ba blue
+H000000 black
+#aaaaaa grey1
+#bbbbbb grey2
+#cccccc grey3*/

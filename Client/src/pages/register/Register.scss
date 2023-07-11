@@ -1,0 +1,62 @@
+.register {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    div{ font-size: 1.6rem}
+  
+    form {
+      width: 80%;
+      padding: 100px 0px;
+      display: flex;
+      gap: 120px;
+      justify-content: center;
+
+  
+      h1 {
+        color: gray;
+        margin-bottom: 20px;
+        font-size: 2.4rem;
+      }
+  
+      .left {
+       
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+  
+        label {
+          color: gray;
+          font-size: 1.8rem;
+        }
+  
+        input,
+        textarea {
+          padding: 20px;
+          border: 1px solid rgb(216, 214, 214);
+          font-size: 1.8rem;
+        }
+  
+        button {
+          border: none;
+          padding: 20px;
+          color: white;
+          font-weight: 500;
+          font-size: 1.8rem;
+          background-color: #e36b09;
+          cursor: pointer;
+        }
+  
+        
+      }
+    }
+  }
+
+
+  /* color codes 
+#e36b09 orange
+#2c78ba blue
+H000000 black
+#aaaaaa grey1
+#bbbbbb grey2
+#cccccc grey3*/

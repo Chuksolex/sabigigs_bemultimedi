@@ -1,0 +1,88 @@
+1. Fiver clone inspiration from Github: https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbHFLaUJudnRVN25EenNCekllWmhmcGV3Z0FlUXxBQ3Jtc0tsdXFEVnI1SVJNNzlwUmJONC1GcHR5NjZRMGhFYTQwaEFPTlBITE1zWE1CcEFmRnk5TEE4c3d6ckdzZkI0aUJnM1hjZHViemw4cDdyQ0xfU2VKa1M4VHVhVVBXQ2wtN2lPbWtfenRjZ3hMWC12V2JsNA&q=https%3A%2F%2Fgithub.com%2Fsafak%2Fyoutube23%2Ftree%2Ffullstack-fiverr&v=csUM7yfiaMw
+
+2.) Depencies used in the PHAXNETGIGS Website:
+A. SASS systematically awesome stylsheet
+B. Eslint depency(for finding out problems in the code. we also configured it)
+
+3. Create all the links or navbar he is creating including (explore, fiver business, and become a seller) but later you hide the become a seller page.
+
+
+<div className='links'>
+                <span>Business Page</span>
+                <span>Explore</span>
+                <span>English </span>
+                <span>Sign In</span>
+                <span>Become a Seller</span>
+                <Button>Sign In</Button>
+
+Overview of What I did Although There are Modifications: 
+To put it simply, we plan to use the MERN stack to build our web application. MongoDB will be used as our primary database. We will use ExpressJS alongside Node.js to set up our API endpoints. Additionally, we plan to use React to build our SPA on the client side and use Redis on the server side as our primary caching solution. Initially, while working on the project, we plan to deploy our server and client both on Heroku . However, Heroku is very limited and we will need the benefits of an Infrastructure as a Service so we will use Amazon EC2 to later deploy our final version of the application.
+
+Serverside: nodemon will allow us to automatically restart a running instance of our node app when files changes take place. We decided to use MongoDB because it is a non relational database which uses the Document Object Model. This allows a lot of flexibility as compared to a RDMS like SQL which requires a very structural model of data that does not change too much. Another strength of MongoDB is its ease in scalability. We will use Mongoose along side MongoDB to model our application data. Additionally, we will host our MongoDB cluster remotely on MongoDB Atlas. Bcrypt will be used to encrypt user passwords that will be stored in the DB. This is to avoid the risks of storing plain text passwords. Moreover, we will use Cloudinary to store images uploaded by the user. We will also use the Twilio SendGrid API to enable automated emails sent by our application. To protect private API endpoints, we will use JSON Web Token and Passport. Also, PayPal will be used as a payment gateway to accept payments from users.
+
+Client Side: As mentioned earlier, we will use React to build our SPA. React uses a virtual DOM which is very efficient in rendering a page. Also React will allow us to reuse components. Furthermore, it is very popular and there is a large community that uses React so it can be helpful if we run into issues. We also plan to make a cross platform mobile application later and using React will allow us to reuse a lot of our code with React Native. Redux will be used to manage state. Redux works great with React and will help us manage a global state in the app and avoid the complications of each component having its own state. Additionally, we will use Bootstrap components and custom CSS to style our app.
+
+Other: Git will be used for version control. During the later stages of our project, we will use Google Analytics to collect useful data regarding user interactions. Moreover, Slack will be our primary communication tool. Also, we will use Visual Studio Code as our primary code editor because it is very light weight and has a wide variety of extensions that will boost productivity. Postman will be used to interact with and debug our API endpoints.
+
+
+
+
+Things to fix in the app:
+1. Register should show login after succcessful registration
+2. Responsiveness
+3. Loading...when registering or signining in.
+4. Addon functionality.
+5. The username and img in gig card is not working well youtube
+
+
+
+Adding Gig with Postman:
+{
+    
+    "images": ["https://images.pexels.com/photos/580151/pexels-photo-580151.jpeg?auto=compress&cs=tinysrgb&w=1600",
+							"https://images.pexels.com/photos/6039245/pexels-photo-6039245.jpeg?auto=compress&cs=tinysrgb&w=1600",
+							"https://images.pexels.com/photos/720598/pexels-photo-720598.jpeg?auto=compress&cs=tinysrgb&w=1600"],
+    
+    "desc": "I will create website easily for you art character from your images and prompts and lot more because am good at what i do. just buy this service cause you will not regret",
+    "price_basic": 50,
+	    "price_standard": 100,
+	    "price_basic_preimium": 300,   
+  
+	   "title": "I will Build a responsive website",
+	   "shortTitle_basic": "Web Development Gig",
+		   "shortTitle_standard": "Web Development Gig hyper",
+		   "shortTitle_premium": "Web Development Gig full features",
+
+
+			"cat": "Software",
+	    "cover":  "https://images.pexels.com/photos/580151/pexels-photo-580151.jpeg?auto=compress&cs=tinysrgb&w=1600",
+			"deliveryTime_basic": 48,
+				"deliveryTime_standard": 24,
+				"deliveryTime_premium": 8,
+
+
+			"revisionNumber_basic": 2,
+				"revisionNumber_standard": 2,
+				"revisionNumber_premium": 2,
+
+
+	     "shortDesc_basic": "Hello friends, I will help with your Website and app making",
+		     "shortDesc_standard": "Hello friends, I will help with your Website and app making",
+		     "shortDesc_premium": "Hello friends, I will help with your Website and app making"
+
+
+			I will build website security and encryption
+
+			A lot of websites are not secure. Some have their passwords exposed. I can help you to encrypt user password, create a safer website and restore confidence of your users..
+
+			This service will help to fix password leaks.
+
+			This service will enhance all ro.und security of your system
+
+			This service will deeply enhance the security of all your services
+
+			
+	
+	    
+
+}

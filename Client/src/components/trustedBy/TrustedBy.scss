@@ -1,0 +1,30 @@
+.trustedBy {
+    background-color: #fff;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+  
+    .container {
+      max-width: 760px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      color: #e36b09;
+      font-weight: 500;
+  
+      img{
+        height: 50px;
+        object-fit: contain;
+      }
+    }
+  }
+
+
+  
+/* color codes 
+#e36b09 orange
+#2c78ba blue
+H000000 black
+#aaaaaa grey1
+#bbbbbb grey2
+#cccccc grey3 */

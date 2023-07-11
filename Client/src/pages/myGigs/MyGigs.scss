@@ -1,0 +1,58 @@
+.myGigs{
+    display: flex;
+    justify-content: center;
+    
+
+        .container{
+            width: 1100px;
+            padding: 50px 0px;
+             .title{
+                display: flex; justify-content: space-between; align-items: center;
+                font-size: 2.4rem;
+                button{
+                    cursor: pointer; font-weight: 500; color: white; background-color: #2c78ba;
+                    padding: 10px; border: none; font-size: 1.8rem;
+                }
+            }
+            table{
+                width: 100%;
+                tr{
+                    th{text-align: left; font-size: 2.2rem}
+                    height: 50px; 
+                    td{
+                        width: 50px; height: 25px; object-fit: cover; font-size: 2rem;
+                        .img{
+                            
+                                width: 50px; height: 25px;
+                                object-fit: cover;
+                            
+
+                        }
+                        .delete{
+                            width: 20px; cursor: pointer;
+
+                        }
+                    
+                    }
+                    &:nth-child(even){
+                        background-color: #1dbf730f ;
+                    }
+                }
+               
+            }
+
+            
+        }
+
+
+}
+
+
+
+/* color codes 
+#e36b09 orange
+#2c78ba blue
+H000000 black
+#aaaaaa grey1
+#bbbbbb grey2
+#cccccc grey3*/

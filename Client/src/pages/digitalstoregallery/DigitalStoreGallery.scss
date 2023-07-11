@@ -1,0 +1,182 @@
+.digitalstore{display: flex;
+    justify-content: center;  
+
+    .container{
+        display: flex;
+        width: 1100px;
+        flex-direction: column; 
+        padding: 30px 30px;
+        gap: 15px;
+        justify-content: center;
+
+        .breadcrumbs {
+            font-weight: 300; font-size: 13px; color:
+            #bbbbbb;
+        }
+        p{
+            font-weight: 300; color: darkgray;
+        }
+
+        .menu{
+            justify-content: space-between;
+            display: flex; align-items: center;
+
+            .left{
+                display: flex; justify-content: space-between;
+                gap: 10px; color: gray; font-weight: 300;
+
+                input {
+                    padding: 5px; border: 1px solid darkgray;
+                    outline: none;
+
+                    &::placeholder{
+                        color: gray
+                    }
+                }
+                button{
+                    background-color: #e36b09 ; color: white;
+                    font-weight: 500; border: none;
+                    cursor: pointer; padding: 5px 10px; border-radius: 5px;
+                }
+            }
+
+            .right{
+                display: flex; gap: 15px; align-items: center; position: relative;
+
+                .sortBy{
+                    color: #bbbbbb; font-weight: 300;
+                }
+                .sorttype{
+                    font-weight: 500;
+                }
+
+                img{
+                    width: 15px;  cursor: pointer; 
+                }
+
+                .rightmenu{
+                    padding: 15px;
+                    background-color: white; border-radius: 5px;
+                    border: .5px solid #e36b09;
+                    position: absolute;
+                    top: 30px;
+                    right:0px; cursor: pointer;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 20px; color: #555;
+
+                    span{ cursor: pointer;}
+                }
+            }
+        }
+        .cards{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+    }
+}
+
+
+/* color codes 
+#e36b09 orange
+#2c78ba blue
+H000000 black
+#aaaaaa grey1
+#bbbbbb grey2
+#cccccc grey3*/
+
+@media (max-width: 800px) {
+    .gigs{display: flex;
+        justify-content: center;  
+    
+        .container{
+            display: flex;
+            width: 100%;
+            flex-direction: column; 
+            padding: 30px 10px;
+            gap: 15px;
+            box-sizing: border-box;
+            flex-wrap: wrap;
+    
+            .breadcrumbs {
+                font-weight: 300; font-size: 13px; color:
+                #bbbbbb;
+            }
+            p{
+                font-weight: 300; color: darkgray;
+            }
+    
+            .menu{
+                justify-content: space-between;
+                display: flex; align-items: center;
+                flex-wrap: wrap;
+    
+                .left{
+                    display: flex; justify-content: space-between;
+                    gap: 10px; color: gray; font-weight: 300;
+    
+                    input {
+                        padding: 5px; border: 1px solid darkgray;
+                        outline: none;
+    
+                        &::placeholder{
+                            color: gray
+                        }
+                    }
+                    button{
+                        background-color: #e36b09 ; color: white;
+                        font-weight: 500; border: none;
+                        cursor: pointer; padding: 5px 10px; border-radius: 5px;
+                    }
+                }
+    
+                .right{
+                    display: flex; gap: 15px; align-items: center; position: relative;
+    
+                    .sortBy{
+                        color: #bbbbbb; font-weight: 300;
+                    }
+                    .sorttype{
+                        font-weight: 500;
+                    }
+    
+                    img{
+                        width: 15px;  cursor: pointer; 
+                    }
+    
+                    .rightmenu{
+                        padding: 15px;
+                        background-color: white; border-radius: 5px;
+                        border: .5px solid #e36b09;
+                        position: absolute;
+                        top: 30px;
+                        right:0px; cursor: pointer;
+                        display: flex;
+                        flex-direction: column;
+                        gap: 20px; color: #555;
+    
+                        span{ cursor: pointer;}
+                    }
+                }
+            }
+            .cards{
+                display: flex;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                
+            }
+    
+        }
+    }
+}  
+    
+//     /* color codes 
+//     #e36b09 orange
+//     #2c78ba blue
+//     H000000 black
+//     #aaaaaa grey1
+//     #bbbbbb grey2
+//     #cccccc grey3*/
+    
