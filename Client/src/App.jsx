@@ -16,8 +16,6 @@ import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 import Seller from "./pages/becomeSeller/SellerSwitchPage";
 import DigitalStoreGallery from "./pages/digitalstoregallery/digitalStoreGallery";
-import Blog from "./pages/blog/Blog";
-
 import {
   QueryClient,
   QueryClientProvider,
@@ -26,6 +24,13 @@ import {
 import SellerSwitchPage from "./pages/becomeSeller/SellerSwitchPage";
 import VerifyEmail from "./pages/verifyEmail/VerifyEmail";
 import CheckInbox from "./pages/checkInbox/CheckInbox";
+import ForgotPassword from "./pages/forgotPassword/ForgotPassword";
+import ResetPassword from "./pages/resetPassword/ResetPassword";
+import Pay from "./pages/pay/Pay";
+import Success from "./pages/success/Success";
+import BlogList from "./pages/blog/BlogList";
+import BlogPostDetails from "./pages/blogPostDetails/BlogPostDetails";
+import BlogForm from "./pages/blogForm/BlogForm";
 //import UpdateGig from "./pages/updateGig/UpdateGig";
 
 
@@ -66,6 +71,7 @@ function App() {
         path: "/gig/:id",
         element: <Gig />
       },
+   
       {
         path: "/orders",
         element: <Orders />
@@ -104,7 +110,19 @@ function App() {
       },
       {
         path: "/blog",
-        element: <Blog />
+        element: <BlogList />
+      },
+      {
+        path: "/blog/:id",
+        element: <BlogPostDetails />
+      },
+      {
+        path: "/create-blog/",
+        element: <BlogForm />
+      },
+        {
+        path: "/edit-blog/:id",
+        element: <BlogForm />
       },
       // {
       //   path: "/updategig",
@@ -117,6 +135,22 @@ function App() {
       {
         path: "/checkinbox",
         element: <CheckInbox />
+      },
+      {
+        path: "/forgot-password",
+        element: <ForgotPassword />
+      },
+      {
+        path: "/reset-password/:resetToken",
+        element: <ResetPassword />
+      },
+      {
+        path: "/pay",
+        element: <Pay />
+      }, 
+      {
+        path: "/success",
+        element: <Success />
       },
     ]
   },

@@ -1,21 +1,3 @@
-// import React from "react";
-// import "./Slide.scss";
-// import Slider from "infinite-react-carousel";
-
-
-// const Slide = ({ children, slidesToShow, arrowsScroll }) => {
-//   return (
-//     <div className="slide">
-//       <div className="container">
-//         <Slider slidesToShow={slidesToShow} arrowsScroll={arrowsScroll} >
-//           {children}
-//         </Slider>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Slide;
 
 import React from "react";
 //import "./Slide.scss";
@@ -29,7 +11,7 @@ function NextArrow(props) {
   return (
     <div
       className={className}
-      style={{ ...style, display: "block", background: "blue" }}
+      style={{ ...style, display: "block", background: "orange" }}
       onClick={onClick}
     />
   );
@@ -40,7 +22,7 @@ function PrevArrow(props) {
   return (
     <div
       className={className}
-      style={{ ...style, display: "block", background: "blue" }}
+      style={{ ...style, display: "block", background: "orange" }}
       onClick={onClick}
     />
   );

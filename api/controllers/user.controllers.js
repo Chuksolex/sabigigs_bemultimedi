@@ -96,7 +96,7 @@ export const updateUserToSeller = async (req, res) => {
 
        export const getUser = async (req,res,next) =>{
 
-         const user = await User.findById(req.params.id) || await User.findOne(req.params.emailToken);
+         const user = await User.findById(req.params.id) ;// i removed getuserby(emailtoken)
 
             res.status(200).send(user);
        };

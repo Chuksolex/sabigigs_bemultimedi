@@ -15,6 +15,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import digitalstoreRoute from "./routes/digitalstore.route.js";
 import bodyParser from "body-parser";
+import blogPostRoute from "./routes/blogPost.route.js";
 
 
 const app = express();
@@ -40,6 +41,7 @@ app.use(cookieParser());
 bodyParser.json()
 
 
+
 //Here we use the user.route.js we created in routes folder
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
@@ -50,6 +52,7 @@ app.use("/api/conversations", conversationRoute);
 app.use("/api/orders", orderRoute);
 app.use("/api/digitalstoregallery", digitalstoreRoute);
 app.use("/api/recommendations", recommendationRoute);
+app.use("/api/blog", blogPostRoute);
 
 
 

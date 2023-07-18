@@ -7,6 +7,7 @@ import * as ReactBootStrap from 'react-bootstrap';
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import VerifyEmail from "../verifyEmail/VerifyEmail.jsx";
+import CheckInbox from "../checkInbox/CheckInbox.jsx";
 
 
 
@@ -50,19 +51,27 @@ function Register() {
 
     const url = await upload(file);
     try {
-      await newRequest.post("/auth/register", {
+      const response = await newRequest.post("/auth/register", {
         ...user,
         img: url,
       });
 
-     
-      //navigate("/emailverificationpage");
+     // Check if the registration was successful
+     if (response.status === 201) {
+      // Redirect to the email verification page
+      navigate("/checkinbox");
+    }
     } catch (err) {
       console.log(err);
-      setError(err.response.data)
-      
-    }
-  };
+      if (err.response && err.response.data) {
+        setError(err.response.data);
+      } else {
+        setError("An error occurred during registration.");
+      }
+    } finally {
+      setLoading(false);
+   }
+  }
 
   useEffect(() => {
     handleSubmit;

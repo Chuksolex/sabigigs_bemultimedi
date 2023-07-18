@@ -2,6 +2,9 @@ import express from "express";
 import createError from "../utils/createError.js";
 import Message from "../models/message.model.js";
 import Conversation from "../models/conversation.model.js";
+import sendNotificationEmail from "../utils/sendNotificationEmail.js";
+
+
 
 
 
@@ -14,6 +17,7 @@ export const createMessage = async (req, res, next) => {
     });
     try {
       const savedMessage = await newMessage.save();
+
       await Conversation.findOneAndUpdate(
         { id: req.body.conversationId },
         {
@@ -25,6 +29,12 @@ export const createMessage = async (req, res, next) => {
         },
         { new: true }
       );
+
+        // Send notification email
+    const recipientEmail = req.isSeller ? req.body.toEmail : req.body.fromEmail;
+    const subject = 'New Message';
+    const message = `A new message has been sent. To check message:<a href='${process.env.CLIENTLINK}/login'>Click here to login</a>`;
+    await sendNotificationEmail(recipientEmail, subject, message);
   
       res.status(201).send(savedMessage);
     } catch (err) {

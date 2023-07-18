@@ -7,7 +7,7 @@ const CheckInbox = () => {
     return (
         <div className="checkinbox">
             <h1>Check Your Inbox</h1>
-            <p>Your email is not verified</p>
+            <p>Your email needs to be verified before you can login. Please click on the link sent to your inbox</p>
         </div>
     )
 

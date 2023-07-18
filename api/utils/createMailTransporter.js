@@ -1,18 +1,22 @@
 import nodemailer from "nodemailer";
 
 // Create a Nodemailer transporter
-export default const createMailTransporter = async() => {
-  
+ const createMailTransporter = async() => {
      const transporter = nodemailer.createTransport({
-      service: "Gmail",
+      service: "Outlook",
       auth: {
-        user: process.env.GMAIL_ACCOUNT,
-        pass: process.env.GMAIL_PASSWORD,
+        user: 'chukwumaoleka@outlook.com',
+        pass: 'Fadama1@biz',
       },
+      tls: {
+        rejectUnauthorized: false,
+      },
+      //secure: false,
+      debug: true,
 
-   
+     
     });
     return transporter;
  
   }
-    
+  export default createMailTransporter  ;

@@ -7,6 +7,7 @@ import CategoryCard from '../../components/categoryCard/CategoryCard';
 import  ProjectCard from "../../components/projectCard/ProjectCard";
 import { cards, projects, books, faqData } from '../../data.js';
 import FAQ from '../../components/faq/FAQ';
+import Testimonials from '../../components/testimonials/Testimonials';
 
 
 
@@ -30,6 +31,8 @@ const Home = () => {
             </div>
           ))}
       </Slide>
+
+      <Testimonials />
 
 {/* //importing componenent stopped above. Features section starts: */}
 

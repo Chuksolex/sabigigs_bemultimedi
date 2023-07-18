@@ -1,12 +1,13 @@
 import express from "express";
 import createError from "../utils/createError.js";
 import Conversation from "../models/conversation.model.js";
+import sendNotificationEmail from "../utils/sendNotificationEmail.js";
 
 
 
 export const createConversation = async (req, res, next) => {
     const newConversation = new Conversation({
-      id: req.isSeller ? req.userId + req.body.to : req.body.to + req.userId,
+      id: req.isSeller ? (req.userId + req.body.to) : (req.body.to + req.userId),
       sellerId: req.isSeller ? req.userId : req.body.to,
       buyerId: req.isSeller ? req.body.to : req.userId,
       readBySeller: req.isSeller,
@@ -16,7 +17,14 @@ export const createConversation = async (req, res, next) => {
     try {
       const savedConversation = await newConversation.save();
       res.status(201).send(savedConversation);
-    } catch (err) {tg
+
+       // Send notification email
+    const recipientEmail = req.isSeller ? req.body.toEmail : req.body.fromEmail;
+    const subject = 'New Conversation';
+    const message = 'A new conversation has been initiated.';
+    await sendNotificationEmail(recipientEmail, subject, message);
+
+    } catch (err) {// removed tg here i think its type error
       next(err);
     }
   };
@@ -27,8 +35,7 @@ export const createConversation = async (req, res, next) => {
         { id: req.params.id },
         {
           $set: {
-            // readBySeller: true,
-            // readByBuyer: true,
+            
             ...(req.isSeller ? { readBySeller: true } : { readByBuyer: true }),
           },
         },

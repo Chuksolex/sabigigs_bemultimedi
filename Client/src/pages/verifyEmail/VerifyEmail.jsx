@@ -17,7 +17,7 @@ const VerifyEmail = () => {
   const search = new URLSearchParams(window.location.search);
 const emailToken = search.get("emailToken");
   //const params = useParams()
-  console.log("emailToken", emailToken);
+  //console.log("emailToken", emailToken);
 
 
 
@@ -27,18 +27,31 @@ const emailToken = search.get("emailToken");
       try {
         const response = await newRequest.patch(`/auth/verify-email?emailToken=${emailToken}`);
         console.log(response.data); // Handle the response as needed
+
+
+        if (response.status === 201|| response.data.isVerified === true) {
+          // Redirect to the email verification page
+          setVerificationStatus("Verified. You can login now!")
+          navigate("/login");
+        } else{
+          setVerificationStatus("Something went wrong! Try again.")
+        }
         
        
       
         
       } catch (error) {
         console.log(error);
-        setErr(error.message)
+        setErr(error.message);
+
+        
       }
     };
 
     if (emailToken) {
       verifyEmail();
+
+     
 
     
       

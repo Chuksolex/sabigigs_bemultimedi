@@ -5,13 +5,15 @@ import { Link } from "react-router-dom";
   import { toast, ToastContainer } from "react-toastify";
   import "react-toastify/dist/ReactToastify.css";
   import { useParams } from "react-router-dom";
+  import Pay from "../../pages/pay/Pay";
 
-  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+ 
 
 
  const PricingTab =  ({item}) => {
 
   const FirstTab = () => {
+    const orderDetails = JSON.stringify(item.features_basic);
     return (
       <div className="FirstTab">
       
@@ -19,7 +21,8 @@ import { Link } from "react-router-dom";
             <h3>Basic:</h3>
             <h2>${item.price_basic}</h2>
         </div>
-        <p>{item.shortDesc_basic}</p>
+        
+        <p className="p">{item.shortDesc_basic}</p>
         <div className="details">
             <div className="item">
                 <img src="/img/clock.png" alt="" />
@@ -36,7 +39,7 @@ import { Link } from "react-router-dom";
          
            <div className="item" key={feature_basic}>
               <img src="/img/greencheck.png" alt="" />
-              <span>{feature_basic}</span>
+              <span className="p">{feature_basic}</span>
 
             </div>
 
@@ -44,7 +47,10 @@ import { Link } from "react-router-dom";
         
 
         </div>
-        <button onClick={handleOrderCreate}>Buy Now</button>
+        <Link className="link-button" to={`/pay?gigId=${item._id}&amount=${item.price_basic}&title=${item.title}&img=${item.cover}&buyerId=${currentUser._id}&sellerId=${item.userId}&orderDetails=${encodeURIComponent(orderDetails)}`}>
+          Buy Now
+        </Link>
+        
         
         
       </div>
@@ -52,6 +58,7 @@ import { Link } from "react-router-dom";
   };  
 
    const SecondTab = () => {
+    const orderDetails = JSON.stringify(item.features_standard);
     return (
       <div className="SecondTab">
       
@@ -60,7 +67,7 @@ import { Link } from "react-router-dom";
             <h3>Standard:</h3>
             <h2>$ {item.price_standard}</h2>
         </div>
-        <p>{item.shortDesc_standard}</p>
+        <p className="p">{item.shortDesc_standard}</p>
         <div className="details">
             <div className="item">
                 <img src="/img/clock.png" alt="" />
@@ -77,19 +84,22 @@ import { Link } from "react-router-dom";
          
            <div className="item" key={feature_standard}>
               <img src="/img/greencheck.png" alt="" />
-              <span>{feature_standard}</span>
+              <span className="p">{feature_standard}</span>
 
             </div>
 
           ))}       
 
         </div>
-        <button onClick={handleOrderCreate}>Buy Now</button>        
+        <Link className="link-button" to={`/pay?gigId=${item._id}&amount=${item.price_standard}&title=${item.title}&img=${item.cover}&buyerId=${currentUser._id}&sellerId=${item.userId}&orderDetails=${encodeURIComponent(orderDetails)}`}>
+          Buy Now
+        </Link>      
       </div>
     )
   };
 
   const ThirdTab = () => {
+    const orderDetails = JSON.stringify(item.features_premium);
     return (
       <div className="ThirdTab"> 
 
@@ -97,7 +107,7 @@ import { Link } from "react-router-dom";
             <h3>Basic:</h3>
             <h2>$ {item.price_premium}</h2>
         </div>
-        <p>{item.shortDesc_premium}</p>
+        <p className="p">{item.shortDesc_premium}</p>
         <div className="details">
             <div className="item">
                 <img src="/img/clock.png" alt="" />
@@ -114,7 +124,7 @@ import { Link } from "react-router-dom";
          
            <div className="item" key={feature_premium}>
               <img src="/img/greencheck.png" alt="" />
-              <span>{feature_premium}</span>
+              <span className="p">{feature_premium}</span>
 
             </div>
 
@@ -122,7 +132,9 @@ import { Link } from "react-router-dom";
         
 
         </div>
-        <button onClick={handleOrderCreate}>Buy Now</button>
+        <Link className="link-button" to={`/pay?gigId=${item._id}&amount=${item.price_premium}&title=${item.title}&img=${item.cover}&buyerId=${currentUser._id}&sellerId=${item.userId}&orderDetails=${encodeURIComponent(orderDetails)}`}>
+          Buy Now
+        </Link>
         
       </div>
     )
@@ -133,8 +145,8 @@ import { Link } from "react-router-dom";
   const [activeTab, setActiveTab] = useState("tab1"); 
   const [priceOption, setPriceOption] = useState('price_basic');
   const [orderDetails, setOrderDetails] = useState(['features_basic']);
-
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+ 
   const {id} = useParams();
  
 
@@ -175,46 +187,40 @@ import { Link } from "react-router-dom";
 
 
  
-  const handleOrderCreate = async () => {    
-    try {           
+  // const handleOrderCreate = async () => {    
+  //   try {           
                
-              const order = {                
+  //             const order = {                
                 
-                price: price,
-                sellerId:item.userId,
-                buyerId: currentUser._id,             
+  //               price: price,
+  //               sellerId:item.userId,
+  //               buyerId: currentUser._id,             
 
-              };
+  //             };
 
-              const response = await newRequest.post("/orders", order);
+  //             const response = await newRequest.post("/orders", order);
 
-              if (response.status === 200) {
-                const data = response.data;
-                console.log(data.message);
-                toast.success("Order created successfully.");
+  //             if (response.status === 200) {
+  //               const data = response.data;
+  //               console.log(data.message);
+  //               toast.success("Order created successfully.");
 
-              } else {
-                // Handle error if order creation failed
-                const error = response.data.error;
-                console.log(error);
-                toast.error(error);
+  //             } else {
+  //               // Handle error if order creation failed
+  //               const error = response.data.error;
+  //               console.log(error);
+  //               toast.error(error);
             
                 
-              }
+  //             }
            
-         } catch (error) {
-              // Handle error if there was an exception or network error
-              console.error("Error creating order:", error);
-              toast.error(error.message);
+  //        } catch (error) {
+  //             // Handle error if there was an exception or network error
+  //             console.error("Error creating order:", error);
+  //             toast.error(error.message);
              
-            }
-
-
-    };
-
-  
-
-  
+  //           }
+   // };  
   return (
 
   <div className="Tabs">

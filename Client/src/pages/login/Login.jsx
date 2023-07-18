@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import "./Login.scss";
 import newRequest from "../../utils/newRequest";
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, Link} from 'react-router-dom';
+import Checkinbox from "../checkInbox/CheckInbox";
+import * as ReactBootStrap from 'react-bootstrap';
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+  const [loading, setLoading]= useState(false)
 
   const navigate = useNavigate();
   
@@ -17,25 +20,25 @@ function Login() {
     e.preventDefault();
 
     try {
+      setLoading(true);
       const data = {email, password}
-        const res = await newRequest.post("/auth/login", {email, password });
-   
-        localStorage.setItem("currentUser", JSON.stringify(res.data));
+        const res = await newRequest.post("/auth/login", {email, password });       
 
-        if (currentUser.isEmailVerified === true) {
-          if (requestedPage) {
-            navigate(requestedPage);
-          } else {
+        if (res.data.isVerified === true) { 
+          localStorage.setItem("currentUser", JSON.stringify(res.data));
+          setLoading(false);    
+        
             navigate('/');
           }
-        } else {
-          navigate('/verify-email');       }
-      
-        // Rest of your component code
-      
+         else {
+          setLoading(false)
+          navigate('/checkinbox'); 
+              }   
+          
 
       } catch (err) {
-      setError(err.respond.data);
+      setError(err.response.data);
+      setLoading(false);
     }
   };
 
@@ -57,8 +60,12 @@ function Login() {
           type="password"
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="submit">Login</button>
+        <button type="submit">{loading ? 'Trying login..' : 'Login'}</button>
+        <div>
+        <Link to="/forgot-password">Forgot Password?</Link> 
         {error && error}
+        </div>
+     
       </form>
     </div>
   );

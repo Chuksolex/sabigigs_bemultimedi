@@ -102,12 +102,11 @@ function Gig () {
                           
             </div>}
             <div className='background-images'>
-            <Slide slidesToShow={1} isAuto={true} slidesToScroll={1}>   
-            {}
-            
-           
-            
-          </Slide>
+            <Slide slidesToShow={1} isAuto={true} slidesToScroll={1}>
+  {data.images.map((imag, i) => (
+    <img key={i} src={imag} />
+  ))}
+</Slide>
           </div> 
            
             <h2>About This Gig</h2>
