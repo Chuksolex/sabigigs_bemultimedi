@@ -32,9 +32,10 @@
   
         input,
         textarea {
-          padding: 20px;
+          padding: 10px;
           border: 1px solid rgb(216, 214, 214);
-          font-size: 1.8rem;
+          font-size: 1.6rem;
+          border-radius: 5px;
         }
   
         button {
@@ -43,10 +44,26 @@
           color: white;
           font-weight: 500;
           font-size: 1.8rem;
+          width: 100%;
           background-color: #e36b09;
           cursor: pointer;
+          border-radius: 5px;
         }
-  
+        
+      
+            .log-in{
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              gap: 10px;
+            a {
+              font-size: 1.8rem;
+              text-decoration: none;
+              
+
+            }
+          
+          }
         
       }
     }

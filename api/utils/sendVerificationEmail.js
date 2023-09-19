@@ -16,7 +16,8 @@ const mailOptions = {
       
       html: `<p> Hello ${newUser.username}, verify your email by clicking on this link:
       ${verificationUrl} </p>`,
-};
+
+    };
 
 
  transporter.sendMail(mailOptions, (error, info) => {

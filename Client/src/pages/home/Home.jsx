@@ -1,17 +1,45 @@
-import React from 'react';
+import React,{useEffect, useState} from 'react';
+import {useQuery} from "@tanstack/react-query";
 import "./Home.scss";
 import Featured from '../../components/featured/Featured';
 import TrustedBy from '../../components/trustedBy/TrustedBy';
-import Slide from '../../components/slide/Slide';
+//import Slide from '../../components/slide/Slide';
 import CategoryCard from '../../components/categoryCard/CategoryCard';
 import  ProjectCard from "../../components/projectCard/ProjectCard";
 import { cards, projects, books, faqData } from '../../data.js';
 import FAQ from '../../components/faq/FAQ';
-import Testimonials from '../../components/testimonials/Testimonials';
-
+import newRequest from '../../utils/newRequest';
+import GigCard from '../../components/gigCard/GigCard';
+import TestimonialSwiper from '../../components/TestimonialSwiper/TestimonialSwiper';
 
 
 const Home = () => {
+  const [popularGigs, setPopularGigs] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [currencyCode, setCurrencyCode] = useState('');
+
+  useEffect(() => {
+    fetchPopularGigs();
+  }, []);
+
+  const fetchPopularGigs = async () => {
+    try {
+      const response = await newRequest.get('/gigs'); // Replace with your API endpoint for fetching gigs
+      const gigs = response.data.gigs;
+      const currencyCode= response.data.currencyCode;
+      setCurrencyCode(currencyCode)
+      const popularGigs = gigs.filter((gig) => gig.sales > 0);
+      setPopularGigs(popularGigs);
+      setIsLoading(false);
+    } catch (error) {
+      setError('Failed to fetch gigs');
+      setIsLoading(false);
+      console.log(error)
+    }
+  };
+
+  
   return (
  
     <div className='home'>
@@ -19,24 +47,23 @@ const Home = () => {
       <TrustedBy />
      
       
-      {/* <Slide slidesToShow={4} arrowsScroll={4}>
-        {cards.map((card) => (
-          <CategoryCard key={card.id} card={card} />
-        ))}
-      </Slide> */}
-      <Slide slidesToShow={4} slidesToScroll={4} isAuto={false} showArrows={true} >
+      <div className='container  category'>
+        <h2 className='sub-head'>Top Categories</h2>
+        <div className='row'>
           {cards.map((card) => (
-            <div key={card.id}>
+            <div key={card.id} className='col-sm-12 col-md-6 col-lg-4 col-xl-3'>
               <CategoryCard card={card} />
             </div>
           ))}
-      </Slide>
+     
+      </div>
 
-      <Testimonials />
+    </div>
 
-{/* //importing componenent stopped above. Features section starts: */}
+    {/* //importing componenent stopped above. Features section starts: */}
 
-      <div className="features">
+    <div className="features">
+      <h2 className='sub-head'>About The Marketplace</h2>
         <div className="container">
 
           <div className="item">
@@ -49,14 +76,14 @@ const Home = () => {
 
                 <div className='title'> 
                  <img src='/img/check.png' alt=''/>
-                Tested Freelancers.
+                Well trained and tested talents
                 </div>
-                <p>Get your work done by tested and trusted professionals</p>
+                <p>Get your work done by in-house tested professionals</p>
                 <div className='title'> 
                   <img src='/img/check.png' alt=''/>
-                Secured Payment Gateways and method .
+                Secured Payment Gateways with currency swap features .
                 </div>
-                <p>Fund not released to gig providers until you approve</p>
+                <p>Subject to numerous reviews until you approve</p>
           
               <div className='title'>
                   <img src='/img/check.png' alt=''/>
@@ -73,6 +100,39 @@ const Home = () => {
         </div>
       
       </div>
+     
+          
+      <div className='testimonial-home container'>
+        <h3 className='sub-head'>Customer Testimonials</h3>
+        <div className='testimonial-container'>
+        <TestimonialSwiper />
+      {/* <Testimonials /> */}
+
+        </div>
+     
+        
+
+      </div>
+
+     
+      
+
+      <div className=" popular-services container ">
+        <h2 className='sub-head'>Popular Services</h2> 
+        <div className='row  '>        
+
+            {popularGigs.map((gig) => (
+              <div key={gig._id} className='col-sm-12 col-md-6 col-lg-4 col-xl-3 text-center'>
+              <GigCard currencyCode={currencyCode}  item={gig} />
+              </div>
+             
+            ))}
+            
+         </div>
+   
+      </div>
+
+
 
       {/* //Phaxnet managed business solution section starts here: with these you can encourage buyers for you to manage their hiring needs */}
 
@@ -115,8 +175,9 @@ const Home = () => {
 
        {/* //Putting FAQ here */}
        <div className='faq'>
-          <h1>Frequently Asked Questions</h1>
-          <FAQ data={faqData} />
+          <h2 className='sub-head' style={ {fontSize: '2.4rem',
+            fontWeight: '700',  margin: '40px 0px'}}>Frequently Asked Questions</h2>
+          <FAQ faqData={faqData} />
         </div>
 
       {/* another slider below to help show inspiring work done on Phaxnet*/}
@@ -128,17 +189,17 @@ const Home = () => {
 
        
 
-         <h2>Awesome Services Rendered on Phaxnet Digitals</h2>
+         {/* <h2>Awesome Services Rendered on Phaxnet Digitals</h2> */}
 
 
       </div>
-        <Slide slidesToShow={4} slidesToScroll={4} isAuto={false} showArrows={true} >
+        {/* <Slide slidesToShow={4} slidesToScroll={4} isAuto={false} showArrows={true} >
             
             {projects.map((card) => (
              <ProjectCard key={card.id} card={card} />
            ))}
            
-         </Slide>
+         </Slide> */}
 
         </div>
      

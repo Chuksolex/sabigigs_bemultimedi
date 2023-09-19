@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import "./Featured.scss";
 //import Slide from '../slide/Slide';
 import Slider from "react-slick";
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -9,7 +10,15 @@ import Slider from "react-slick";
 
 
 const Featured = () => {
+  const [input, setInput] = useState("");
+  const navigate = useNavigate();
 
+  const handleSearch= () => {
+    if (input.trim() !== "") {
+    navigate(`/gigs?search=${input}`);
+    setInput("");
+  }
+  }
     const CustomPrevArrow = (props) => {
         const { className, style, onClick } = props;
         return (
@@ -42,7 +51,7 @@ const Featured = () => {
         prevArrow: <CustomPrevArrow />,
         nextArrow: <CustomNextArrow />,      
         autoplay: true,
-        autoplaySpeed: 5000,
+        autoplaySpeed: 9000,
       
       };
 
@@ -55,9 +64,9 @@ const Featured = () => {
                  <div className="search">
                     <div className="searchInput">
                         <img src= 'img/search.png' alt=''/>
-                        <input type="text" placeholder='search any service'/>
+                        <input type="text" placeholder='search any service' onChange={(e) => setInput(e.target.value)}/>
                     </div>
-                    <button>Search</button>
+                    <button onClick={handleSearch}>Search</button>
 
                  </div>
                  <div className="popular">
@@ -71,16 +80,16 @@ const Featured = () => {
             <div className="right">
                 
             <Slider {...settings}>
-            <div>
+            <div className="image-slider">
               <img src="/img/christy.png"  />
             </div>
-            <div>
+            <div className="image-slider">
               <img src="/img/finegirl1.png"  />
             </div>
-            <div>
+            <div className="image-slider">
               <img src="/img/blackman1.png"  />
             </div>
-            <div>
+            <div className="image-slider">
               <img src="/img/finegirl.png"  />
             </div>
           

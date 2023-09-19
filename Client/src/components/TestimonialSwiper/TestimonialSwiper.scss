@@ -1,26 +1,24 @@
-.testimonial {
-    align-items: center;
-    margin: 40px;
-    display: flex;
-    gap: 20px;
-    justify-content: space-around;
-    flex-direction: column;
 
 
-    .slick-slide {
+    .card{
+      width: 260px;
+      height: 200px;
+      background-color: rgb(231, 218, 195) !important;
+      align-self: center;     
       display: flex;
-      justify-content: center;
       border: solid 0.5px ;
-      padding: 10px;
-      width: 25%;
-      border-radius: 10px;
-      gap: 20px;
+      border-radius: 10px !important;
+      margin:0 auto;
+      box-sizing: border-box;
+
+    
+   
+  
      
     
-    }
-   
+    
     h3{
-        font-size: 2rem;
+        font-size: 2.2rem;
         font-weight: 500;
     }
     .top{display: flex;
@@ -31,7 +29,6 @@
       width: 50px;
       height: 50px;
       border-radius: 50%;
-      object-fit: cover;
       margin-right: 10px;
 
     }
@@ -42,6 +39,8 @@
   }
     .testimonial-details {
       text-align: center;
+      padding: 10px 10px;
+      box-sizing: border-box;
   
      
   
@@ -61,7 +60,21 @@
   
       p {
         font-size: 14px;
+        word-break: break-all;
+        
       }
     }
   }
+ 
+
+  @media screen and (min-width: 480px) {
+    .swiper-container {
+      width: 480px;
+    }
+  }
   
+  @media screen and (min-width: 768px) {
+    .swiper-container {
+      width: 768px;
+    }
+  }

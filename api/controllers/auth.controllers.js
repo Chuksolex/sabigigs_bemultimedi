@@ -62,8 +62,8 @@ export const register = async (req, res, next) => {
 
        
    
-  } catch (err) {
-    next(err);
+  } catch (error) {
+    next(error);
   }
 };
 
@@ -120,7 +120,7 @@ export const login = async (req,res,next) =>{
 
           const token = jwt.sign({
             id: user._id,
-            isVerified: user.isVerified,
+            isVerified: user.isVerified===true,
             isSeller: user.isSeller
                   }, process.env.JWT_KEY)
 

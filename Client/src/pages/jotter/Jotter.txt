@@ -86,3 +86,23 @@ Adding Gig with Postman:
 	    
 
 }
+
+
+
+VSCODE SHORTCUTS
+ CNTRL P: search file by name
+ ALT 1 OR 2 OR ...: MOVE FROM TABS 1 TO 2 OR ...
+ CONTRL TAB: AUTOMATIC MOVE TO DIFFERENT VSCODE TABS
+
+
+ To Do: 
+ .1 Find out if useReducer can update states in other components. if not implement redux and redux toolkit
+ 2. Create A ADD Gig Page that has sections
+ 3. ADD Addons to the ADD Page
+ 4. Implement Add to Cart: update state of notification, proceed, addons, checkout, messaging feature.
+ 5. 
+
+
+ IMPORTANT
+ 1. If I want to make it a full freelancing site, then add to carts will not be implemented the way I did. for simplicity one order can have addons, quantity, but it should be traceble to only one seller.
+ 2. No 1 means that the order will have to be per seller.

@@ -8,7 +8,7 @@ const userRoute = express.Router();
 
 userRoute.delete("/:id", verifyToken, deleteUser);
  userRoute.put("/:id", verifyToken, updateUserToSeller) // used this to add gigs.
-userRoute.get(`/:id`, getUser) // can be applied when fetching gig the user created
+userRoute.get('/:id', getUser) // can be applied when fetching gig the user created
 //userRoute.post("/verify-email", verifyEmail)
 
 

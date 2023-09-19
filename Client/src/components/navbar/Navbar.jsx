@@ -1,7 +1,12 @@
 import React, {Component, useEffect, useState} from 'react';
+import { useSelector } from 'react-redux';
 import "./Navbar.scss";
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import newRequest from '../../utils/newRequest';
+import CurrencySwitch from '../currencySwitch/currencySwitch';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { MDBBadge, MDBIcon } from 'mdb-react-ui-kit';
+
 
 
 const Navbar = () => {
@@ -9,6 +14,17 @@ const Navbar = () => {
 const [active, setActive] = useState(false);
 const isActive = () => { window.scrollY >0 ? setActive(true) : setActive(false)}
 const [open, setOpen] = useState(false);
+const navigate = useNavigate();
+const [input, setInput] = useState("");
+
+
+const handleSearch= () => {
+  if (input.trim() !== "") {
+  navigate(`/gigs?search=${input}`);
+  setInput("");
+}
+}
+
 
 const {pathname} = useLocation();
 
@@ -31,7 +47,71 @@ const handleLogout = async () => {
     console.log(err);
     
   }
-}
+};
+//const cart = useSelector((state) => state.cartSlice.cart);
+const cartCount = useSelector((state) => state.cartSlice.cartCount);
+
+console.log("cart in cartCount:", cartCount);
+
+const encodeCategory = (categoryName) => {
+  const encodedCategoryName = encodeURIComponent(categoryName);
+  return `/gigs?cat=${encodedCategoryName}`;
+};
+
+
+
+const categories = [
+  {
+    name: 'Programming & Tech',
+    subcategories: ['Web Design', 'Web Development', 'Software'],
+  },
+  {
+    name: 'Digital Marketing',
+    subcategories: ['Email Marketing', 'SEO Services', 'Social Media Marketing'],
+  },
+  {
+    name: 'Advertising',
+    subcategories: [],
+  },
+  {
+    name: 'Business',
+    subcategories: [],
+  },
+  {
+    name: 'Writing & Translation',
+    subcategories: [
+      'Blog Posts & Articles',
+      'Transcription',
+      'Translation',
+      'Technical Writing',
+      'Academic & Research Writing',
+      'Ghost-Writing',
+    ],
+  },
+  {
+    name: 'Graphics & Design',
+    subcategories: [
+      'Logo & Identity Branding',
+      'Packaging & Labels',
+      'Art & Illustration',
+      'Visual Design',
+      'Print Design',
+    ],
+  },
+  {
+    name: 'Music, Audio & Videos',
+    subcategories: [
+      'Voice-over',
+      'Video Editing',
+      '2-D Animations',
+      '3-D Animations',
+      'Explainer Videos',
+    ],
+  },
+];
+
+
+
 
 
 
@@ -43,19 +123,46 @@ const handleLogout = async () => {
         <div className='logo'>
            <Link to="/" className='logo-img'> 
          
-             <img src= "https://drive.google.com/uc?export=view&id=1jIYDtuhpH5u5IT0sbAHFjCThox27rxjE" alt="" />
+             {/* //<img src= "https://drive.google.com/uc?export=view&id=1jIYDtuhpH5u5IT0sbAHFjCThox27rxjE" alt="" /> */}
+             <img  src='img/logo_png.png'/>
              
           </Link> 
           
           
         </div>
-       <div className='links'>
-               <span className="link">Business Page</span> 
+        <div className="search">
+                    <div className="searchInput">
+                        <img src= 'img/search.png' alt=''/>
+                        <input type="text" placeholder='search any service' onChange={(e) => setInput(e.target.value)}/>
+                    </div>
+                    <button onClick={handleSearch}>Search</button>
+
+                 </div>
+       <div className='links'> 
+              
                <span className="link"><Link to="/blog" className='link'>Blog</Link></span>
-                <span className="link">Explore</span>
-                <span className="link">English </span>
+               <span className="link">
+                 <Link to="/mycart" className='link position-relative'>
+          
+                    <ShoppingCartIcon sx={{ fontSize: 30 }} /> 
+                    {cartCount > 0 && ( 
+                      <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger fs-6">
+                        {cartCount}
+                        <span className="visually-hidden">Checkout</span>
+                      </span>
+                     )} 
+                 
+                
+                
+                 </Link>
+               </span>
+                <span className="link"><Link to="/gigs" className='link'>Gigs</Link></span>
+                           
+                {<CurrencySwitch />}
                 {/* <span>Become a Seller</span> */}
-                {currentUser ? (
+               
+        </div>
+        {currentUser ? (
                   <div className='user' onClick={() =>setOpen(!open)}>
                     <img src={currentUser.img || "/img/noavatar.jpg"} alt=''/>
                     <span>{currentUser.userName}</span>
@@ -69,6 +176,7 @@ const handleLogout = async () => {
                                     )}
                             <Link className="link" to="/orders">Orders</Link>
                             <Link className="link" to="/Messages">Messages</Link>
+                          
                             <Link className="link" onClick={handleLogout}>Logout</Link>
                          </div>
                         }
@@ -76,14 +184,17 @@ const handleLogout = async () => {
                   </div>
                  ): (
                   <>
-                    <Link to="/login" className="link">Sign in</Link>
+                  <div className='user'>
+                     <Link to="/login" className="link"><span>Sign in</span></Link>
                     <Link className="link" to="/register">
                       <button>Join</button>
                     </Link>
+
+                  </div>
+                   
                   </>
                 )
                 }
-        </div>
         </div>
             {/* className container ended here. so I can stack this other menu down*/}
             {/* am also going to make this menu disapper when navbar is active */}
@@ -92,106 +203,29 @@ const handleLogout = async () => {
        <>
         <hr />
         <div className="menu">
-                <nav className="popup-menu">
-                  <ul className="menu-items">
-                    <li className="menu-item">
-                      <Link to="/"  className="menu-link" >Programming & Tech</Link>
-                      <ul className="submenu">
-                        <li>
-                          <Link className='link'>Web Design</Link></li>
-                        <li> 
-                           <Link className='link'>Web Development</Link></li>
-                        <li>  
-                        <Link className='link'>Software</Link></li>      
-                      </ul>
+           <nav className="popup-menu">
+              <ul className="menu-items">
+            {categories.map((category, index) => (
+              <li className="menu-item" key={index}>
+                <Link className="link menuLink" to={encodeCategory(category.name)}>
+                  {category.name}
+                </Link>
+               
+                <ul className="submenu">
+                  {category.subcategories.map((subcategory, subIndex) => (
+                    <li key={subIndex}>
+                      <Link className="link" to={`/gigs?cat=${encodeURIComponent(subcategory)}`}>
+                        {subcategory}
+                      </Link>
                     </li>
-                    <li className="menu-item">
-                      <Link to="/category2" className="menu-link">Digital Marketing</Link>
-                      <ul className="submenu">
-                        <li>
-                          <Link className='link'>Email Marketing</Link></li>
-                        <li> 
-                           <Link className='link'>SEO Services</Link></li>
-                        <li> 
-                            <Link className='link'>SOCIAL MEDIA MARKETING</Link></li>                 
-                      </ul>
-                    </li>
-                    <li className="menu-item">
-                      <Link to="/category2" className="menu-link">Advertising</Link>
-                      
-                    </li>
-                    <li className="menu-item">
-                      <Link to="/category2" className="menu-link">Business</Link>
-                    
-                    </li>
-                    <li className="menu-item">
-                      <Link to="/category2" className="menu-link">Writing & Translation</Link>
-                      <ul className="submenu"> 
-                        <li>   <Link className='link'>Blog Posts & Articles</Link></li>
-                        <li>
-                         <Link className='link'>Transcription</Link> </li>
-                        <li>   <Link className='link'>Translation</Link> </li>
-                        <li>
-                         <Link className='link'>Technical Writing</Link>  </li>
-                        <li>  <Link className='link'>Academic & Research Writing</Link> </li>
-                        <li>  
-                         <Link className='link'>Ghost-Writing</Link>  </li>             
-                      </ul>
-                     </li>
-                      <li className="menu-item">
-                      <Link to="/category2" className="menu-link">Graphics & Design</Link>
-                      <ul className="submenu"> 
-                        
-                          <li>
-                            <Link className='link'>Logo & Identity Branding</Link>
-                          </li>
-                          <li>
-                            <Link className='link'>Packaging & Labels</Link> 
-                          </li>
-                          <li>                           
-                             <Link className='link'>Art & Illustration</Link>
-                          </li>
-                          <li>
-                             <Link className='link'>Visual Design</Link> 
-                          </li>
-                          <li>
-                              <Link className='link'>Print Design</Link>   
-                          </li>    
-                      </ul>
-                    </li>
-                     <li className="menu-item" >
-                      <Link to="/gigs?cat=music, audio & videos" className="menu-link">Music, Audio & Videos</Link>
-                      <ul className="submenu"> 
-                          <li>
-                            <Link className='link'>Voice-over</Link>                            
-                          </li>
-                          <li>
-                              <Link className='link'>Video Editing</Link>                             
-                          </li>
-                          <li>
-                              <Link className='link'>2-D Animations</Link>                             
-                          </li>
-                          <li>                               
-                            <Link className='link'>3-D Animations</Link>                             
-                          </li>
-                          <li>                          
-                             <Link className='link'>Explainer Videos</Link>                                
-                          </li>
-                          
-                      </ul>
-                    </li>
-                  
-                  </ul>
-                </nav>
-
-
-
-
-
-         
-      
-          
+                  ))}
+                </ul>
+              </li>
+            ))}
+             </ul>
+          </nav>
         </div>
+
         <hr />
         </>)}
 

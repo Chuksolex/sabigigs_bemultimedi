@@ -1,0 +1,21 @@
+/* DiscountModal.css */
+.error-text {
+    color: red; /* Style error text in red */
+    font-size: 16px; /* Increase the font size of the error text */
+  }
+  
+  /* Add any other styles you need for the modal here */
+  /* DiscountModal.css */
+/* Increase the font size for labels, input fields, and the error message */
+label,
+.form-control, input
+{
+  font-size: 16px; /* Adjust the font size to your preference */
+}
+
+/* Increase padding for input fields */
+.form-group {
+  padding: 10px; /* Adjust the padding to your preference */
+}
+
+/* Add any other custom styles you need */

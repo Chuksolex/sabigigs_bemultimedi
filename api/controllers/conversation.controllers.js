@@ -2,30 +2,59 @@ import express from "express";
 import createError from "../utils/createError.js";
 import Conversation from "../models/conversation.model.js";
 import sendNotificationEmail from "../utils/sendNotificationEmail.js";
+import User from "../models/user.model.js";
 
 
 
 export const createConversation = async (req, res, next) => {
-    const newConversation = new Conversation({
-      id: req.isSeller ? (req.userId + req.body.to) : (req.body.to + req.userId),
-      sellerId: req.isSeller ? req.userId : req.body.to,
-      buyerId: req.isSeller ? req.body.to : req.userId,
-      readBySeller: req.isSeller,
-      readByBuyer: !req.isSeller,
-    });
+   
   
     try {
+      const conversationExists = await Conversation.findOne({
+        $or: [
+          { sellerId: req.userId, buyerId: req.body.to },
+          { sellerId: req.body.to, buyerId: req.userId },
+        ],
+      });
+  
+      if (conversationExists) {
+        // Conversation already exists, return the existing conversation
+        return res.status(200).send(conversationExists);
+      }
+  
+       // Create a new conversation
+      const newConversation = new Conversation({
+        id: req.isSeller ? (req.userId + req.body.to) : (req.body.to + req.userId),
+        sellerId: req.isSeller ? req.userId : req.body.to,
+        buyerId: req.isSeller ? req.body.to : req.userId,
+        readBySeller: req.isSeller,
+        readByBuyer: !req.isSeller,
+      });
+
+
       const savedConversation = await newConversation.save();
+
+      
+       // Send notification email
+       const reciever= await User.findById(req.body.to);
+      
+       const sender= await User.findById(req.userId);
+     
+
+
+
+      
+    const recipientEmail = reciever.email;
+
+    const subject = 'New Message';
+    const message = `You have received a new message from ${sender.username}..`;
+    await sendNotificationEmail(recipientEmail, subject, message);
       res.status(201).send(savedConversation);
 
-       // Send notification email
-    const recipientEmail = req.isSeller ? req.body.toEmail : req.body.fromEmail;
-    const subject = 'New Conversation';
-    const message = 'A new conversation has been initiated.';
-    await sendNotificationEmail(recipientEmail, subject, message);
 
-    } catch (err) {// removed tg here i think its type error
+    } catch (err) {
       next(err);
+      console.log(err);
     }
   };
   

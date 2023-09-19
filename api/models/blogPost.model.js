@@ -1,6 +1,7 @@
 // models/BlogPost.js
 
-import mongoose from 'mongoose'
+import mongoose from 'mongoose';
+const { Schema } = mongoose;
 
 const blogPostSchema = new mongoose.Schema({
   title: { type: String, required: true },

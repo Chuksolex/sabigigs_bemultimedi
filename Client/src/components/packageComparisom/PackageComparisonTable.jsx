@@ -1,7 +1,7 @@
 import React from 'react';
 import "./PackageComparisonTable.scss";
 
-const PackageComparisonTable = ({ item }) => {
+const PackageComparisonTable = ({ item, currencyCode }) => {
   const packageTitles = ['Basic', 'Standard', 'Premium'];
 
   const getTickSymbol = (value) => {
@@ -24,9 +24,9 @@ const PackageComparisonTable = ({ item }) => {
           </tr>
           <tr>
             <th></th>
-            <th>${item.price_basic}</th>
-            <th>${item.price_standard}</th>
-            <th>${item.price_premium}</th>
+            <th>{currencyCode} {item.price_basic}</th>
+            <th>{currencyCode} {item.price_standard}</th>
+            <th>{currencyCode} {item.price_premium}</th>
           </tr>
         </thead>
         <tbody>
@@ -56,9 +56,9 @@ const PackageComparisonTable = ({ item }) => {
           ))}
 
           <tr>            <th>Total Price</th>
-            <td>${item.price_basic}</td>
-            <td>${item.price_standard}</td>
-            <td>${item.price_premium}</td>
+            <td>{currencyCode} {item.price_basic}</td>
+            <td>{currencyCode} {item.price_standard}</td>
+            <td>{currencyCode} {item.price_premium}</td>
 
           </tr>
         </tbody>

@@ -1,0 +1,132 @@
+/* SingleOrder.css */
+
+.single-order-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .order-header {
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  
+  .order-title {
+    font-size: 24px;
+    margin: 0;
+  }
+  
+  .order-info {
+    font-size: 16px;
+    color: #777;
+  }
+  
+  .order-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .action-button {
+    background-color: #2c78ba;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .order-details {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  
+  .order-details-title {
+    font-size: 20px;
+    margin: 0 0 20px;
+  }
+  
+  .order-details-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .order-details-list li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .gig-image img {
+    max-width: 100px;
+    border-radius: 5px;
+    margin-right: 20px;
+  }
+  
+  .gig-info {
+    flex: 1;
+  }
+  
+  .gig-title {
+    font-size: 18px;
+    margin: 0;
+  }
+  
+  .gig-price {
+    font-size: 16px;
+    margin: 0;
+  }
+  
+  .gig-quantity {
+    font-size: 16px;
+    margin: 0;
+  }
+  
+  .gig-addons {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0;
+  }
+  
+  .gig-addons li {
+    font-size: 14px;
+    margin: 0;
+    color: #777;
+  }
+  
+  .order-total {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  
+  .order-total-title {
+    font-size: 20px;
+    margin: 0 0 20px;
+  }
+  
+  .order-total-price {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+    color: #2c78ba;
+  }
+  
+  .order-timestamp {
+    font-size: 16px;
+    color: #777;
+  }
+  
+  .order-timestamp-text {
+    margin: 0;
+  }
+  
+  /* You can add more styles and adjust them as needed to match your design */
+  

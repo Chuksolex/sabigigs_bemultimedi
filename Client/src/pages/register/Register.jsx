@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import upload from "../../utils/upload.js";
 import "./Register.scss";
 import newRequest from "../../utils/newRequest.js";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import * as ReactBootStrap from 'react-bootstrap';
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
@@ -59,7 +59,7 @@ function Register() {
      // Check if the registration was successful
      if (response.status === 201) {
       // Redirect to the email verification page
-      navigate("/checkinbox");
+      navigate("/checkinbox", {replace: true});
     }
     } catch (err) {
       console.log(err);
@@ -119,12 +119,15 @@ function Register() {
           />
           <button type="submit">Register  {(loading === false)? "" : (loading === true)? handleSubmit: <ReactBootStrap.Spinner animation="border" />}  </button>
         
-          {(loading && !error) ?  <ReactBootStrap.Spinner animation="border" /> : error  }       
+          {(loading && !error) ?  <ReactBootStrap.Spinner animation="border" /> : error  }   
+
+          <span className="log-in">Already a user?<Link to="/login"><span>Login</span> </Link></span>    
           
         </div>
       
-     
+        
       </form>
+      
     </div>
   );
 }

@@ -32,7 +32,7 @@ const emailToken = search.get("emailToken");
         if (response.status === 201|| response.data.isVerified === true) {
           // Redirect to the email verification page
           setVerificationStatus("Verified. You can login now!")
-          navigate("/login");
+          navigate("/login", {replace: true});
         } else{
           setVerificationStatus("Something went wrong! Try again.")
         }

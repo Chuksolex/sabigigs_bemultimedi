@@ -1,0 +1,57 @@
+/* Styles for the container div */
+.CurrencySwitch {
+  display: inline-block;
+  font-family: Arial, sans-serif;
+  position: relative; /* Add position relative to the container */
+}
+
+/* Styles for the select element */
+select {
+  font-size: 16px;
+  padding: 5px 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  background-color: #fff;
+  cursor: pointer;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  width: 70px; /* Adjust the width as needed */
+}
+
+/* Style the options inside the select */
+option {
+  font-size: 1.6rem;
+  background-color: #fff;
+}
+
+/* Remove the default dropdown arrow in some browsers */
+select::-ms-expand {
+  display: none;
+}
+
+/* Style the custom arrow icon */
+.CurrencySwitch::after {
+  content: '▼'; /* Unicode down arrow character */
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: gray;
+  font-size: 10px; /* Adjust the font size as needed */
+}
+
+
+@media screen and (max-width: 768px) {
+  select {
+    font-size: 1.2rem;
+  
+    width: 65px; /* Adjust the width as needed */
+  }
+  option {
+    font-size: 1.2rem;
+  }
+  
+}

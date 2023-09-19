@@ -4,7 +4,7 @@ import "./CategoryCard.scss";
 
 const CategoryCard = ({card}) => {
   return (
-    <Link to="/gigs?cat=design">
+    <Link to={`/gigs?cat=${card.title}`}>
        <div className="categoryCard">
           <img src={card.img} alt=''/>
          <span className='description'>{card.desc}</span>

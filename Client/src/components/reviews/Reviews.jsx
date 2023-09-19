@@ -21,7 +21,7 @@ const Reviews = ({gigId}) => {
 //This one is updating or creating review
   const mutation = useMutation({
     mutationFn: (review) => {
-      return newRequest.post("reviews", review)
+      return newRequest.post("/reviews", review)
     },
     onSuccess: () => {
       queryClient.invalidateQueries("reviews");
@@ -58,7 +58,7 @@ const Reviews = ({gigId}) => {
             <option value={4}>4</option>
             <option value={5}>5</option>
           </select>
-          <button>Send</button>
+          <button type='submit'>Send</button>
         </form>
         </div>
       <hr />

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Login.scss";
 import newRequest from "../../utils/newRequest";
-import {useNavigate, Link} from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import Checkinbox from "../checkInbox/CheckInbox";
 import * as ReactBootStrap from 'react-bootstrap';
 
@@ -12,31 +12,31 @@ function Login() {
   const [loading, setLoading]= useState(false)
 
   const navigate = useNavigate();
-  
-    
-  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
       setLoading(true);
-      const data = {email, password}
-        const res = await newRequest.post("/auth/login", {email, password });       
+      const data = { email, password }
+      const res = await newRequest.post("/auth/login", data);
 
-        if (res.data.isVerified === true) { 
-          localStorage.setItem("currentUser", JSON.stringify(res.data));
-          setLoading(false);    
+      if (res.data.isVerified === true) { 
+        localStorage.setItem("currentUser", JSON.stringify(res.data));
+        // Redirect back to the intended gig page after successful login
+        const intendedOrder = localStorage.getItem('intendedOrder');
+        const wantedGigInfo = localStorage.getItem("wantedGigInfo");
+        setLoading(false);  
+        wantedGigInfo? navigate(`/gig/${wantedGigInfo._id}`) : intendedOrder? navigate('/mycart'): navigate("/");
+        localStorage.removeItem('intendedOrder');
+        localStorage.removeItem("wantedGigInfo");       
         
-            navigate('/');
-          }
-         else {
-          setLoading(false)
-          navigate('/checkinbox'); 
-              }   
-          
+      } else {
+        setLoading(false)
+        navigate('/checkinbox'); 
+      }   
 
-      } catch (err) {
+    } catch (err) {
       setError(err.response.data);
       setLoading(false);
     }
@@ -62,12 +62,13 @@ function Login() {
         />
         <button type="submit">{loading ? 'Trying login..' : 'Login'}</button>
         <div>
-        <Link to="/forgot-password">Forgot Password?</Link> 
-        {error && error}
+          <Link to="/forgot-password">Forgot Password?</Link> 
+          {error && error}
         </div>
-     
+       
       </form>
     </div>
   );
 }
+
 export default Login;

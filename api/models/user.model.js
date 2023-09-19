@@ -20,6 +20,10 @@ const userSchema = new Schema({
     required: false,
     
   },
+  name:{
+    type: String,
+    required: false
+  },
   country:{
     type: String,
     required: true,

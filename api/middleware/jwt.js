@@ -34,10 +34,14 @@ export const verifyToken = async (req, res, next) => {
     const payload = jwt.verify(token, process.env.JWT_KEY);
     req.userId = payload.id;
     req.isSeller = payload.isSeller;
+    req.email = payload.email,
+    req.phone = payload.phone,
+    req.isVerified= payload.isVerified,
+    req.username=payload.username
 
     // Check if email is verified
-    const user = await User.findById(payload.id);
-    if (!user.isEmailVerified) {
+    //const user = await User.findById(payload.id);
+    if (!req.isVerified=== true) {
       return next(createError(403, "Email not verified"));
     }
 

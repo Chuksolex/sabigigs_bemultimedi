@@ -96,13 +96,13 @@
 export const cards = [
   {
     id: 1,
-    title: "GRAPHIC DESIGN",
+    title: "Graphics Design",
     desc: "Add talent to AI",
     img: "https://images.pexels.com/photos/7532110/pexels-photo-7532110.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
   },
   {
     id: 2,
-    title: "BUSINESS SERVICES",
+    title: "Business",
     desc: "Build yor brand",
     img: "https://images.pexels.com/photos/11295165/pexels-photo-11295165.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
   },
@@ -114,31 +114,37 @@ export const cards = [
   },
   {
     id: 4,
-    title: "DIGITAL MARKETING",
+    title: "Digital Marketing",
     desc: "Share your message",
     img: "https://images.pexels.com/photos/7608079/pexels-photo-7608079.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
   },
   {
     id: 5,
-    title: "ADVERTISING",
+    title: "Advertising",
     desc: "Engage your audience",
     img: "https://images.pexels.com/photos/13388047/pexels-photo-13388047.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
   },
   {
     id: 6,
-    title: "Social Media",
+    title: "Social Media Marketing",
     desc: "Reach more customers",
     img: "https://images.pexels.com/photos/11378899/pexels-photo-11378899.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
   },
   {
     id: 7,
-    title: "SEO SERVICES",
+    title: "SEO Services",
     desc: "Unlock growth online",
     img: "https://images.pexels.com/photos/4820241/pexels-photo-4820241.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
   },
   {
     id: 8,
     title: "Illustration",
+    desc: "Color you dreams",
+    img: "https://images.pexels.com/photos/15032623/pexels-photo-15032623.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
+  },
+  {
+    id: 8,
+    title: "Software",
     desc: "Color you dreams",
     img: "https://images.pexels.com/photos/15032623/pexels-photo-15032623.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
   },

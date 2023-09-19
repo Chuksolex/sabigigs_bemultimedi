@@ -1,16 +1,19 @@
 
 
-import React from 'react';
+import React, {useState} from 'react';
 import "./Orders.scss";
 import {useQuery} from "@tanstack/react-query";
+
 import newRequest from "../../utils/newRequest.js";
 import {Link} from "react-router-dom";
+import OrderCard from '../../components/orderCard/orderCard';
 
 
 
 const Orders = () => {
 
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  const [sortedData, setSortedData] = useState([]);
 
   const { isLoading, error, data, } = useQuery({
     queryKey: ['orders'],
@@ -20,10 +23,21 @@ const Orders = () => {
         )
       .then(
         (res) => {
-        return res.data;
-      })
-    
+          const sortedOrders = res.data.sort((a, b) => {
+            const dateA = new Date(a.createdAt);
+            const dateB = new Date(b.createdAt);  
+            // Sort in reverse order (latest orders first)
+            return dateB - dateA;
+          });
+  
+          // Update the sorted data in state
+          setSortedData(sortedOrders);
+  
+          return sortedOrders;
+        })
   });
+
+ 
   
 
   return (
@@ -37,19 +51,22 @@ const Orders = () => {
     </div>
     <table>
       <tr>
-        <th>Image</th>
-        <th>Title</th>
+      {(currentUser.isSeller)? <th>Buyer</th>: <th>Seller</th>}
         <th>Price</th>
-        <th>Contact</th>
+        <th className='tx_ref'>Trans. Ref.</th>
+        <th>Time</th>
+        <th></th>
+        <th>Status</th>
+        <th>Action</th>
 
+
+ 
       </tr>
-      {data.map((order) => (
+      {sortedData.map((order) => (
         <tr key={order._id}>
-        <td>    <img className='img' src={order.img} alt="" /> </td>
-        <td>{order.title}</td>
-        <td>{order.price}</td>
-      
-        <td> <img className='delete' src="/img/message.png" alt="" />   </td>
+         <OrderCard singleOrder={order} />
+        
+
 
       </tr>
 
@@ -61,4 +78,5 @@ const Orders = () => {
   )
 }
 
-export default Orders
+export default Orders;
+

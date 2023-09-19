@@ -1,16 +1,126 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import "./PricingTab.scss";
+import { useNavigate, Link, useLocation } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+//import Pay from "../../pages/pay/Pay";
 import newRequest from "../../utils/newRequest.js";
-import { Link } from "react-router-dom";
-  import { toast, ToastContainer } from "react-toastify";
-  import "react-toastify/dist/ReactToastify.css";
-  import { useParams } from "react-router-dom";
-  import Pay from "../../pages/pay/Pay";
+import { setSelectedGig } from "../../reducers/orderSlice";
 
+
+const PricingTab = ({ item, currencyCode, currentUser }) => {
+  const [activeTab, setActiveTab] = useState("tab1");
+  const [priceOption, setPriceOption] = useState(item.price_basic);
+  const [orderDetail, setOrderDetail] = useState(item.features_basic);
+  const [shortDesc, setShortDesc] = useState(item.shortDesc_basic);
+  const [gigPackage, setGigPackage]= useState("Basic Package");
+  //const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const sellerId= item.userId;
+  const buyerId= currentUser?._id;
+
+
+  const handleTab1 = () => {
+    setActiveTab("tab1");
+    setPriceOption(item.price_basic);
+    setOrderDetail(item.features_basic);
+    setPackage("Basic Package");
+    setShortDesc(item.shortDesc_basic)
+  };
+
+  const handleTab2 = () => {
+    setActiveTab("tab2");
+    setPriceOption(item.price_standard);
+    setOrderDetail(item.features_standard);
+    setPackage("Standard Package");
+    setShortDesc(item.shortDesc_standard)
+  };
+
+  const handleTab3 = () => {
+    setActiveTab("tab3");
+    setPriceOption(item.price_premium);
+    setOrderDetail(item.features_premium);
+    setPackage("Premium Package");
+    setShortDesc(item.shortDesc_premium)
+  };
+  
+    const handleProceed = (e) => {
+      e.preventDefault();
+      const order = {
+        gigId: item._id,
+        gigTitle: item.title,
+        gigPackage,
+        currencyCode,
+        cover: item.cover,
+        shortDesc: shortDesc,        
+        amount: priceOption,
+        orderDetails: orderDetail,
+        sellerEmail: item.email,
+        sellerphone: item.phone,
+        totalStarts: item.totalStars,
+        starNumber: item.startNumber,
+        discountValidThrough: item.discountValidThrough,
+        discountStartDate: item.discountStartDate,
+        discountOffer: item.discountOffer,
+        discountType: item.discountType,
+        addons:item.addons
+      };
+      dispatch(setSelectedGig(order));
+      navigate("/gigpackage")
+    };
+
+    const handleContactSeller = async () => {
+      if (!currentUser) {
+        localStorage.setItem("wantedGigInfo", item);        
+  
+        toast.info('To send a message you need to log in first! You will be redirected to the login page in 2 secs..', {
+          position: toast.POSITION.TOP_CENTER,
+          autoClose: 9000, // 2 seconds
+        });
+  
+         // Redirect after a delay
+       setTimeout(() => {
+          navigate("/login"); // Replace with your login page route
+        }, 9100); // 1 second
+        
+        return;
+      }else {    
+
+        try {
+         
+          // Create a new conversation
+          const response = await newRequest.post("/conversations", {
+            to: sellerId,
+                         
+            fromEmail: currentUser.email,
+          }); 
+          const newConversationId = await response.data._id; // Assuming your response contains the new conversation's ID
+    
+          // Redirect the user to the new conversation page
+          navigate(`/message/${newConversationId}`);
+        } catch (error) {
+          // Handle any errors that may occur during the process
+          console.error('Error initiating conversation:', error);
+        }
+      };
+    
+
+      }
+   
+     
+  
  
 
 
- const PricingTab =  ({item}) => {
+
+
+
+
+
 
   const FirstTab = () => {
     const orderDetails = JSON.stringify(item.features_basic);
@@ -19,7 +129,7 @@ import { Link } from "react-router-dom";
       
           <div className="price">
             <h3>Basic:</h3>
-            <h2>${item.price_basic}</h2>
+            <h2>{currencyCode} {item.price_basic}</h2>
         </div>
         
         <p className="p">{item.shortDesc_basic}</p>
@@ -47,9 +157,18 @@ import { Link } from "react-router-dom";
         
 
         </div>
-        <Link className="link-button" to={`/pay?gigId=${item._id}&amount=${item.price_basic}&title=${item.title}&img=${item.cover}&buyerId=${currentUser._id}&sellerId=${item.userId}&orderDetails=${encodeURIComponent(orderDetails)}`}>
-          Buy Now
-        </Link>
+        {/* Replace this with proceed as it applies to all tabs*/}
+        {/* <button type="button" className="link-button" onClick={(e) => handleBuyNowClick( priceOption, orderDetail, e)}> */}
+        <button type="button" className="link-button"  onClick={(e) => handleProceed(e)}>Proceed</button>
+
+        {/* <Link className="link-button"  onClick={handleProceed()}
+          to="/gigpackage"
+            
+        >Proceed</Link> */}
+         <Link className="link-button bg-warning text-dark" 
+            onClick={handleContactSeller}       
+        >Contact Seller</Link>
+      
         
         
         
@@ -65,7 +184,7 @@ import { Link } from "react-router-dom";
         {/* Second  tab content will go here */}
         <div className="price">
             <h3>Standard:</h3>
-            <h2>$ {item.price_standard}</h2>
+            <h2>{currencyCode} {item.price_standard}</h2>
         </div>
         <p className="p">{item.shortDesc_standard}</p>
         <div className="details">
@@ -91,9 +210,15 @@ import { Link } from "react-router-dom";
           ))}       
 
         </div>
-        <Link className="link-button" to={`/pay?gigId=${item._id}&amount=${item.price_standard}&title=${item.title}&img=${item.cover}&buyerId=${currentUser._id}&sellerId=${item.userId}&orderDetails=${encodeURIComponent(orderDetails)}`}>
-          Buy Now
-        </Link>      
+        {/* <button type="button" className="link-button" onClick={(e) => handleBuyNowClick( priceOption, orderDetail, e)}>
+        Buy Now
+      </button>      */}
+      <button type="button" className="link-button"  onClick={(e) => handleProceed(e)}>Proceed</button>
+
+         <Link className="link-button bg-secondayr text-dark"
+          onClick={handleContactSeller}
+        
+        >Contact Seller</Link>
       </div>
     )
   };
@@ -105,7 +230,7 @@ import { Link } from "react-router-dom";
 
         <div className="price">
             <h3>Basic:</h3>
-            <h2>$ {item.price_premium}</h2>
+            <h2>{currencyCode} {item.price_premium}</h2>
         </div>
         <p className="p">{item.shortDesc_premium}</p>
         <div className="details">
@@ -132,9 +257,11 @@ import { Link } from "react-router-dom";
         
 
         </div>
-        <Link className="link-button" to={`/pay?gigId=${item._id}&amount=${item.price_premium}&title=${item.title}&img=${item.cover}&buyerId=${currentUser._id}&sellerId=${item.userId}&orderDetails=${encodeURIComponent(orderDetails)}`}>
-          Buy Now
-        </Link>
+        {/* <button type="button" className="link-button" onClick={(e) => handleBuyNowClick( priceOption, orderDetail, e)}>
+        Buy Now
+      </button>        */}
+      <button type="button" className="link-button"  onClick={(e) => handleProceed(e)}>Proceed</button>
+         <Link className="link-button bg-warning text-dark"  onClick={handleContactSeller}>Contact Seller</Link>
         
       </div>
     )
@@ -142,85 +269,7 @@ import { Link } from "react-router-dom";
 
 
 
-  const [activeTab, setActiveTab] = useState("tab1"); 
-  const [priceOption, setPriceOption] = useState('price_basic');
-  const [orderDetails, setOrderDetails] = useState(['features_basic']);
-  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
  
-  const {id} = useParams();
- 
-
-  const handleTab1 = () => {
-    // update the state to tab1
-    setActiveTab("tab1");
-    setPriceOption('price_basic');
-    setOrderDetails(['feature_basic']);
-
-  };
-  const handleTab2 = () => {
-    // update the state to tab2
-    setActiveTab("tab2");
-    setPriceOption('price_standard');
-    setOrderDetails(['feature_standard']);
-   
-
-  };
-  const handleTab3 = () => {
-    // update the state to tab2
-    setActiveTab("tab3"); 
-    setPriceOption('price_premium');
-    setOrderDetails(['feature_premium']);  
-
-  };
-
-  let price;
-  if (priceOption === "price_basic") {
-    price = item.price_basic;
-  } else if (priceOption === "price_standard") {
-    price = item.price_standard;
-  } else if (priceOption === "price_premium") {
-    price = item.price_premium;
-  } else {
-    throw new Error("Invalid price option.");
-  }
-
-
-
- 
-  // const handleOrderCreate = async () => {    
-  //   try {           
-               
-  //             const order = {                
-                
-  //               price: price,
-  //               sellerId:item.userId,
-  //               buyerId: currentUser._id,             
-
-  //             };
-
-  //             const response = await newRequest.post("/orders", order);
-
-  //             if (response.status === 200) {
-  //               const data = response.data;
-  //               console.log(data.message);
-  //               toast.success("Order created successfully.");
-
-  //             } else {
-  //               // Handle error if order creation failed
-  //               const error = response.data.error;
-  //               console.log(error);
-  //               toast.error(error);
-            
-                
-  //             }
-           
-  //        } catch (error) {
-  //             // Handle error if there was an exception or network error
-  //             console.error("Error creating order:", error);
-  //             toast.error(error.message);
-             
-  //           }
-   // };  
   return (
 
   <div className="Tabs">
@@ -239,6 +288,14 @@ import { Link } from "react-router-dom";
             {activeTab === "tab2" && <SecondTab/>}
             {activeTab === "tab3" && <ThirdTab />}
      </div>
+     {error && (
+        <div>
+          <p>An error occurred: {error.message}</p>
+        </div>
+      )}
+      {loading?   (<div>
+          <p>Creating Order....</p>
+        </div>) : ""}
   </div>
   )
 }

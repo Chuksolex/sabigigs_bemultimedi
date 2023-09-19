@@ -4,7 +4,7 @@
     justify-content: center;
   
     form {
-      width: 360px;
+      //width: 360px;
       padding: 100px 0px;
       display: flex;
       flex-direction: column;
@@ -23,19 +23,22 @@
   
       input,
       textarea {
-        padding: 20px;
+        padding: 10px;
         border: 1px solid rgb(216, 214, 214);
         font-size: 1.8rem;
+        border-radius: 5px;
       }
   
       button {
         border: none;
-        padding: 20px;
+        padding: 10px;
         color: white;
         font-weight: 500;
         font-size: 1.8rem;
         background-color: #e36b09;
+        border-radius: 5px;
         cursor: pointer;
+        width: 100%;
       }
   
       span{

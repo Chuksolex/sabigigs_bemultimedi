@@ -1,34 +1,57 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import newRequest from "../../utils/newRequest";
+import "./Success.scss";
 
 const Success = () => {
   const { search } = useLocation();
   const navigate = useNavigate();
   const params = new URLSearchParams(search);
-  const payment_intent = params.get("payment_intent");
+  const tx_ref = params.get("tx_ref", );
+  const transaction_id = params.get("transaction_id");
+  const [error, setError] = useState(null);
+  const [confirmed, setConfirmed] =useState(false);
+  const [loading, setLoading] = useState(true);
+
+
+
 
   useEffect(() => {
     const makeRequest = async () => {
       try {
-        await newRequest.put("/orders", { payment_intent });
+       const response= await newRequest.put("/orders", { tx_ref });
         setTimeout(() => {
           navigate("/orders");
         }, 5000);
+
+      
+          setConfirmed(true);
+          setLoading(false)
+       
+       
       } catch (err) {
+        setLoading(false)
         console.log(err);
+        setError(err);
+        setConfirmed(false)
       }
     };
 
     makeRequest();
-  }, [payment_intent]);
+  }, []);
 
   return (
     <div className="success">
-      Payment successful. You are being redirected to the orders page. Please do
-      not close the page
+      {loading && <h2>Confirming Order....</h2>}
+      {confirmed ? (
+        <h2>Congratulations, your order has been confirmed!</h2>
+      ) : (
+        <p>{error && error.message}</p>
+      )}
     </div>
   );
 };
 
 export default Success;
+
+//https://developer.flutterwave.com/docs/integration-guides/testing-helpers/

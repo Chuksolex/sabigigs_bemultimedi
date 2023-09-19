@@ -1,9 +1,8 @@
 import createMailTransporter  from "./createMailTransporter.js";
 import dotenv from "dotenv";
 
- const sendVerificationEmail = async (newUser) => {
+ const sendNotificationEmail = async (recipientEmail, subject, message) => {
     const transporter = await createMailTransporter();
-    const verificationUrl = `${process.env.EMAIL_VERIFICATION_URL_CLIENT}/verify-email?emailToken=${newUser.emailToken}`;
 
 
 
@@ -11,11 +10,10 @@ import dotenv from "dotenv";
 //send mail
 const mailOptions = {
     from: `phaxnetgigs  <chukwumaoleka@outlook.com>`,
-      to: newUser.email, 
-      subject: "Account Verification",
+      to: recipientEmail, 
+      subject: subject,
       
-      html: `<p> Hello ${newUser.username}, verify your email by clicking on this link:
-      ${verificationUrl} </p>`,
+      text: message,
 };
 
 
@@ -23,8 +21,8 @@ const mailOptions = {
     if (error) {
         console.log(error)
     }else {
-        console.log("Verification Email sent");
+        console.log("Conversation Email sent");
     }
 });
 }
-export default sendVerificationEmail
+export default sendNotificationEmail

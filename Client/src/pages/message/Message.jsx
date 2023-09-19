@@ -1,5 +1,6 @@
+import React, {useEffect, useState, useRef} from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import React from "react";
+
 import { Link, useParams } from "react-router-dom";
 import newRequest from "../../utils/newRequest";
 import "./Message.scss";
@@ -7,8 +8,20 @@ import "./Message.scss";
 const Message = () => {
   const { id } = useParams();
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-
+  console.log("currentUser at message:",currentUser);
   const queryClient = useQueryClient();
+  const [userImages, setUserImages] = useState({});
+  const [isTyping, setIsTyping] = useState(false);
+  const typingTimer = useRef(null);
+
+
+  const handleTyping = () => {
+    setIsTyping(true);
+    clearTimeout(typingTimer.current);
+    typingTimer.current = setTimeout(() => {
+      setIsTyping(false);
+    }, 3000); // Adjust the duration as needed
+  };
 
   const { isLoading, error, data } = useQuery({
     queryKey: ["messages"],
@@ -36,11 +49,38 @@ const Message = () => {
     e.target[0].value = "";
   };
 
+  useEffect(() => {
+    const userIds = [...new Set(data?.map((m) => m.userId))];
+  
+    const fetchUserImages = async () => {
+      try {
+        const userImagePromises = userIds.map(async (userId) => {
+          const response = await newRequest.get(`/users/${userId}`);
+          return { userId, imageUrl: response.data.img }; // Assuming your API returns the user's profile image URL
+        });
+  
+        const userImagesData = await Promise.all(userImagePromises);
+  
+        const userImagesObject = {};
+        userImagesData.forEach((userData) => {
+          userImagesObject[userData.userId] = userData.imageUrl;
+        });
+  
+        setUserImages(userImagesObject);
+      } catch (error) {
+        console.error("Error fetching user images:", error);
+      }
+    };
+  
+    fetchUserImages();
+  }, [data]);
+  
+
   return (
     <div className="message">
       <div className="container">
         <span className="breadcrumbs">
-          <Link to="/messages">Messages</Link>  » {currentUser.username} »
+          <Link to="/messages">Messages</Link> ›<span>{currentUser.username}</span>›
         </span>
         {isLoading ? (
           "loading"
@@ -51,8 +91,8 @@ const Message = () => {
             {data.map((m) => (
               <div className={m.userId === currentUser._id ? "owner item" : "item"} key={m._id}>
                 <img
-                  src="https://images.pexels.com/photos/270408/pexels-photo-270408.jpeg?auto=compress&cs=tinysrgb&w=1600"
-                  alt=""
+                      src={userImages[m.userId] || "/img/noavatar.jpg" }
+                      alt="profile-pic" 
                 />
                 <p>{m.desc}</p>
               </div>
@@ -61,8 +101,20 @@ const Message = () => {
         )}
         <hr />
         <form className="write" onSubmit={handleSubmit}>
-          <textarea type="text" placeholder="write a message" />
+          <textarea 
+            type="text" 
+            placeholder="write a message"
+            onChange={handleTyping} 
+            disabled={isLoading} 
+            
+          />
+
           <button type="submit">Send</button>
+          {isLoading ? (
+          <span>Loading...</span> 
+        ) : (
+          isTyping && <span>Typing...</span>
+        )}
         </form>
       </div>
     </div>

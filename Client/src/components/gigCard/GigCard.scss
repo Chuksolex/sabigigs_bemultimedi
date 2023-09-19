@@ -1,26 +1,45 @@
 .gigCard {
-  width: 324px;
-  height: 360px;
-  // border: 1px solid rgb(237, 236, 236);
-  border: 1px solid rgb(228, 228, 228);
+  display: flex;
+  width: 400px;
+  max-height: 320px;
+  
   padding-bottom: 60px;
   position: relative;
+  //border-radius: 10px;
+  margin: 20px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 
   img {
     width: 100%;
-    height: 40%;
+    max-height: 110px;
+    border-radius: 10px;
+    
     object-fit: cover;
+    overflow: contain;
   }
 
   .promo-badge {
     position: absolute;
-    top: 10px;
-    right: 10px;
-    background-color: #ff9800;
-    color: white;
-    font-size: 12px;
+    top: 75px;
+    right: 6px;
+    background-color: rgb(22, 6, 6);
+    border-radius: 20px;    
     padding: 5px 8px;
-    border-radius: 4px;
+    
+      .promo-badge-text1{
+        color: white;
+      font-size: 14px;  
+      }
+      .promo-badge-text2{
+        color: rgb(223, 247, 11);
+      font-size: 12px;
+      
+  
+      }
+     
+
+
+   
   }
 
   .info {
@@ -42,17 +61,28 @@
       }
 
       span {
+        font-size: 1.2rem;
       }
     }
 
     p {
       color: #111;
     }
+    .linki {
+      text-decoration: none; /* Remove the underline by default */
+    }
+    
+    .linki:hover {
+      text-decoration: underline; /* Add underline on hover */
+    }
+    
 
     .star {
       display: flex;
       align-items: center;
       gap: 5px;
+      color: #111;
+      background-color: rgb(253, 253, 253);
 
       img {
         height: 14px;
@@ -61,52 +91,45 @@
 
       span {
         font-size: 14px;
-        font-weight: bold;
         color: #ffc108;
       }
     }
   }
 
-  hr {
-    height: 0;
-    border: 0.5px solid rgb(228, 228, 228);
-  }
+
 
   .details {
-    padding: 10px 20px;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
+    position: relative;
 
     img {
-      width: 16px;
-      height: 16px;
+      width: 14px;
+      height: 14px;
       cursor: pointer;
-      object-fit: cover;
+      object-fit: contain;
+   
+    
     }
 
     .price {
-      display: inline-flex; 
-      justify-content: space-between;
-      gap: 10px;
+      //display: inline-flex; 
+     //gap: 4px;
+   
       
       span {
-        color: #999;
-        font-size: 12px;
+        color: #222325;
+        font-size: 14px;
+      
         
       }
 
-      h2 {
-        color: #555;
-        font-size: 18px;
-        font-weight: 400;
-        text-align: end;
+      h4 {
+        color: #222325;
+        font-size: 16px;
+        font-weight: 700;
       }
 
-      sup {
-        font-size: 12px;
-        font-weight: 300;
-      }
     }
   }
 }

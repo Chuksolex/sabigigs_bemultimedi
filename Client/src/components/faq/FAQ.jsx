@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import "./FAQ.scss";
 
-const FAQ = ({ data }) => {
+const FAQ = ({ faqData }) => {
     const [expandedItems, setExpandedItems] = useState([]);
 
   const toggleItem = (index) => {
@@ -14,7 +14,7 @@ const FAQ = ({ data }) => {
 
   return (
     <div className='faq'>
-      {data.map((item, index) => (
+      {faqData.map((item, index) => (
         <div key={index} className='container'>
           <h3 onClick={() => toggleItem(index)}>
             QUESTION: {item.question}
@@ -29,3 +29,5 @@ const FAQ = ({ data }) => {
 };
 
 export default FAQ;
+
+       

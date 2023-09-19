@@ -85,15 +85,15 @@ const gigSchema = new Schema(
     },
     revisionNumber_basic: {
       type: Number,
-      required: true,
+      required: false,
     },
     revisionNumber_standard: {
       type: Number,
-      required: true,
+      required: false,
     },
     revisionNumber_premium: {
       type: Number,
-      required: true,
+      required: false,
     },
     features_basic: {
       type: [String],
@@ -138,10 +138,39 @@ const gigSchema = new Schema(
       type: Number,
       default: 0,
     },
+    discountType: {
+      type: String,
+      enum: ["None", "Black Friday", "Deal of the Week", "Flash Sale"],
+      default: "None",
+    },
+      discountStartDate: {
+      type: Date,
+      default: null
+    },
     discountValidThrough: {
       type: Date,
+      default: null
     },
+    gigClicks: [
+      {
+        sessionID: {
+          type: String,
+          // Do not set required: true for sessionID in gigClicks
+        },
+        timestamp: {
+          type: Date,
+          default: Date.now,
+        },
+      },
+    ],
+    addons: [{
+      title: { type: String, required: true },
+      shortDesc: { type: String, required: true },
+      price: { type: Number, required: true },
+    }],
   },
+  
+
   {
     timestamps: true,
   }

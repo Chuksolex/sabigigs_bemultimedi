@@ -2,7 +2,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    div{
+    text-align: center;
+    height: 50vh;
+
+    div{display: flex;
         font-size: 1.6rem;
     }
 }
