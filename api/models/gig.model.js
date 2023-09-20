@@ -11,6 +11,10 @@ const gigSchema = new Schema(
       type: String,
       required: true,
     },
+    isSeller: {
+      type: Boolean,
+      default: false,
+    },
     desc: {
       type: String,
       required: false,
