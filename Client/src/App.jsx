@@ -21,7 +21,6 @@ import Gigs from "./pages/gigs/Gigs";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 import Seller from "./pages/becomeSeller/SellerSwitchPage";
-import DigitalStoreGallery from "./pages/digitalstoregallery/digitalStoreGallery";
 import {
   QueryClient,
   QueryClientProvider,
@@ -195,10 +194,7 @@ function App() {
         path: "/sellerswitchpage",
         element: <SellerSwitchPage />
       },
-      {
-        path: "/digitalresources",
-        element: <DigitalStoreGallery />
-      },
+   
       {
         path: "/blog",
         element: <BlogList />
