@@ -64,7 +64,19 @@ const connect = async () => {
 
 
 
-app.use(cors({origin:"http://localhost:5173", credentials:true} ));
+//app.use(cors({origin:"http://localhost:5173", credentials:true} ));
+app.use(cors({
+  origin: function (origin, callback) {
+    const allowedOrigins = ['https://phaxnetgig.onrender.com', 'http://localhost:5173'];
+    if (allowedOrigins.includes(origin) || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
+}));
+
 app.use(express.json());
 app.use(cookieParser());
 bodyParser.json();
