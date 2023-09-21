@@ -19,6 +19,10 @@ const gigSchema = new Schema(
       type: Number,
       default: 0,
     },
+    isSeller: {
+      type: Boolean,
+      default: false,
+    },
     starNumber: {
       type: Number,
       default: 0,
