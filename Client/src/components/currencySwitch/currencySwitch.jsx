@@ -13,9 +13,10 @@ const CurrencySwitch = () => {
   const dispatch = useDispatch();
 
   const handleCurrencyChange = async (event) => {
-    const currency = event.target.value;
 
     try {
+      const currency = event.target.value;
+
       console.log('Dispatching updateCurrency with:', currency);
       await newRequest.post('/currency', { currency });
 

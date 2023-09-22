@@ -21,7 +21,7 @@ import currencySlice from './reducers/currencySlice';
 const rootReducer = combineReducers({
    cartSlice,
    gigsSlice,
-  orderSlice,
+   orderSlice,
   currencySlice
 });
 

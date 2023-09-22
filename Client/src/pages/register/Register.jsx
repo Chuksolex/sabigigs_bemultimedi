@@ -61,8 +61,8 @@ function Register() {
       // Redirect to the email verification page
       navigate("/checkinbox", {replace: true});
     }
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.log(error);
       if (err.response && err.response.data) {
         setError(err.response.data);
       } else {

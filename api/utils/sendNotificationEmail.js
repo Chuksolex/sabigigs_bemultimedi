@@ -1,5 +1,4 @@
 import createMailTransporter  from "./createMailTransporter.js";
-import dotenv from "dotenv";
 
  const sendNotificationEmail = async (recipientEmail, subject, message) => {
     const transporter = await createMailTransporter();

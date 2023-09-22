@@ -13,26 +13,6 @@ import validator from "validator";
 
 
 
-// export const register = async (req,res,next) => {
-
-//     try {
-
-//         const hash = bcrypt.hashSync(req.body.password, 5);
-
-//         const newUser = new User({
-//                             ...req.body,
-//                              password: hash});
-
-//          await newUser.save();         
-
-//         res.status(201).send("User successfully created");
-        
-//     } catch (err) {
-//         next(err)
-        
-//     }
-
-// };
 
 
 export const register = async (req, res, next) => {
@@ -104,38 +84,85 @@ export const verifyEmail = async (req, res, next) => {
   
 
 
-export const login = async (req,res,next) =>{
-    //Todo
-        try {
-          const user = await User.findOne({email:req.body.email});
+// export const login = async (req,res,next) =>{
+//     //Todo
+//         try {
+//           const user = await User.findOne({email:req.body.email});
           
-          if(!user) return next(createError(404, "User not found"));
+//           if(!user) return next(createError(404, "User not found"));
 
-          if (!user.isVerified) {
-            return next(createError(403, "Email not verified. Please check your email for verification."));
-          }
+//           if (!user.isVerified) {
+//             return next(createError(403, "Email not verified. Please check your email for verification."));
+//           }
 
-          const isCorrect = bcrypt.compareSync(req.body.password, user.password);
-          if (!isCorrect) return next(createError(400, "Wrong password or username!"));
+//           const isCorrect = bcrypt.compareSync(req.body.password, user.password);
+//           if (!isCorrect) return next(createError(400, "Wrong password or username!"));
 
-          const token = jwt.sign({
-            id: user._id,
-            isVerified: user.isVerified===true,
-            isSeller: user.isSeller
-                  }, process.env.JWT_KEY)
+//           const token = jwt.sign({
+//             id: user._id,
+//             isVerified: user.isVerified===true,
+//             isSeller: user.isSeller
+//                   }, process.env.JWT_KEY)
 
-          const {password, ...info} = user._doc;
+//           const {password, ...info} = user._doc;
 
-            res.cookie("accessToken", token, {
-                httpOnly: true,
+//             res.cookie("accessToken", token, {
+//                 httpOnly: true,
                 
-            }).status(200).send(info);
+//             }).status(200).send(info);
 
-        } catch (err) {
-            next(err)
+//         } catch (err) {
+//             next(err)
             
-        }
+//         }
+// };
+
+
+export const login = async (req, res, next) => {
+  try {
+    const user = await User.findOne({ email: req.body.email });
+
+    if (!user) return next(createError(404, "User not found"));
+
+    if (!user.isVerified) {
+      return next(
+        createError(
+          403,
+          "Email not verified. Please check your email for verification."
+        )
+      );
+    }
+
+    const isCorrect = bcrypt.compareSync(req.body.password, user.password);
+    if (!isCorrect) return next(createError(400, "Wrong password or username!"));
+
+    const currentTime = new Date().getTime();
+    const expirationTime = currentTime + 6 * 60 * 60 * 1000;
+
+    const token = jwt.sign(
+      {
+        id: user._id,
+        isVerified: user.isVerified === true,
+        isSeller: user.isSeller,
+        exp: Math.floor(expirationTime / 1000), // Expiration time in seconds
+      },
+      process.env.JWT_KEY
+    );
+
+    const { password, ...info } = user._doc;
+
+    res.cookie("accessToken", token, {
+      httpOnly: true,
+      // Set the token's expiration time as a cookie
+      expires: new Date(expirationTime),
+      sameSite: 'none', // Allow cross-origin cookies
+      secure: true,
+    }).status(200).send(info);
+  } catch (err) {
+    next(err);
+  }
 };
+
 
 export const logout = async (req,res) =>{
     

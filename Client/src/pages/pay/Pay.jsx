@@ -1,114 +1,4 @@
-// import React from "react";
-// import "./Pay.scss";
 
-// const Pay = ()=>{
-//     return (
-//         <h1>Pay</h1>
-//     )
-// }
-
-// export default Pay
-
-// import React, { useEffect, useState } from 'react';
-// import { Navigate, useLocation } from 'react-router-dom';
-// import axios from 'axios';
-// import newRequest from '../../utils/newRequest';
-// import queryString from 'query-string';
-
-// const Pay = () => {
-//   const location = useLocation();
-//   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-  
-  
-//   const {
-//     gigId,
-//     amount,
-//     title,
-//     img,
-//     buyerId,
-//     sellerId,
-//     orderDetails
-//   } = queryString.parse(location.search);
-
-//   // Parse the orderDetails as an array if necessary
-//   const parsedOrderDetails = Array.isArray(orderDetails)
-//     ? orderDetails
-//     : JSON.parse(decodeURIComponent(orderDetails));
-
-//   const [clientSecret, setClientSecret] = useState('');
-  
-//   const [tx_ref, setTx_ref] = useState('');
-
-//   useEffect(() => {
-//     const createPaymentIntent = async () => {
-//       try {
-//         const response = await newRequest.post(`/orders/create-payment-intent/${gigId}`, {
-//           // Pass any required parameters to the backend API
-//           gigId, amount, title, img, sellerId, buyerId, orderDetails, email:currentUser.email
-//         });
-//         const { clientSecret, tx_ref, email} = response.data
-//         setClientSecret(clientSecret);
-//         setTx_ref(tx_ref);
-//       } catch (error) {
-//         console.log(error);
-//         // Handle error scenario
-//       }
-//     };
-
-//     createPaymentIntent();
-//   }, []);
-
-//   useEffect(() => {
-//     if (clientSecret !== '') {
-//       const flutterwaveScript = document.createElement('script');
-//       flutterwaveScript.src = 'https://checkout.flutterwave.com/v3.js';
-//       flutterwaveScript.async = true;
-//       flutterwaveScript.onload = () => {
-//         const flutterwave = new FlutterwaveCheckout({
-//           public_key: 'FLWPUBK_TEST-514f0e5cfdf34da20feb17aa69dbe7c6-X', // Replace with your Flutterwave public key
-//           tx_ref:tx_ref, // Replace with a unique transaction reference
-//           amount: amount, // Replace with the actual payment amount
-//           currency: 'USD', // Replace with the appropriate currency code
-//           redirect_url: 'https://localhost:5173/success', // Replace with your success page URL
-//           customer: {
-//             email: currentUser.email, // Replace with the customer's email address
-//             // Add more customer details as needed
-//           },
-//           callback: (response) => {
-//             // Handle the payment response
-//             console.log(response);
-//             if (response.status === 'successful') {
-//               // Payment was successful, update order status
-             
-//             } else {
-//               // Payment was not successful, handle accordingly
-//             }
-//           },
-//           customizations: {
-//             title: 'Payment Page',
-//             description: 'Complete your payment',
-//             logo: 'https://your-website.com/logo.png', // Replace with your logo URL
-//           },
-//         });
-
-//         flutterwave.open();
-//       };
-
-//       document.body.appendChild(flutterwaveScript);
-//     }
-//   }, [clientSecret]);
-
-
- 
-
-//   return (
-//     <div className='pay'>
-//       {/* Render any necessary UI elements for the payment page */}
-//     </div>
-//   );
-// };
-
-// export default Pay;
 
 import React, {useState} from 'react';
 import { useSelector, useDispatch} from 'react-redux';
@@ -226,9 +116,9 @@ const Pay = () => {
   })
   .catch((error) => {
     setLoading(false);
-    console.error("Error creating order:", error.message);
-    setError(error);
-    toast.error("Payment failed:", error.message);
+    console.error("Error creating order:", error.response.data);
+    setError(error.response.data);
+    toast.error("Payment failed:", error.response.data);
   });
 
 
@@ -255,7 +145,7 @@ const Pay = () => {
             <Card className="mb-6 ml-4 mt-4 w-100 h-100" style={{ borderRadius: "10px", maxHeight: "150px"}}>
               <Card.Header className="py-4 text-start fs-1 d-flex">
               
-                <CreditCard color="#e36b09" size={30} className="ml-4"/><h5 className="mb-0 ms-4 fs-2">Available Payment Options</h5>
+                <CreditCard color="#e36b09" size={30} className="ml-4"/><h5 className="mb-0 ms-4 fs-2">Select Any Available Payment Option</h5>
               </Card.Header>
               <Card.Body className=''>
               <div class="col-12 col-md-12 chk-bor pay-pad pay-radio b-r-b-5">
@@ -269,7 +159,7 @@ const Pay = () => {
                           onChange={handlePaymentMethodChange}
                           checked={selectedPaymentMethod === 'credit_card'}
                       />
-											<img class="ms-5" title="Flutterwave" src="/public/img/flutterwave_logo.png" alt="flutterwave" style={{maxWidth:"200px"}}/>
+											<img class="ms-5" title="Flutterwave" src="/img/flutterwave.png" alt="flutterwave logo" style={{maxWidth:"200px"}}/>
 											</label>
 										</div>
 									</div>
@@ -329,6 +219,8 @@ const Pay = () => {
                 >
                   Pay Now
                 </Button>
+                {error && <p className='text-danger'>{error}</p>}
+
               
               </Card.Body>
             </Card>
@@ -343,6 +235,7 @@ const Pay = () => {
         </Row>
         
       </Container>
+
     
 
 </div>

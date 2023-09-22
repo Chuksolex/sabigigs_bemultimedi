@@ -3,6 +3,8 @@ import { Link, useNavigate, useNavigation, useParams } from 'react-router-dom';
 import "./GigCard.scss";
 import { useQuery } from '@tanstack/react-query';
 import newRequest from '../../utils/newRequest';
+import {Container, Col, Card } from 'react-bootstrap'; // 
+
 
 
 
@@ -10,9 +12,8 @@ import newRequest from '../../utils/newRequest';
 
 
 const GigCard = ({item, currencyCode}) => {
- console.log("item.discountOffer, item.discountType, item.discountValidThrough", item.discountOffer, item.discountType, item.discountValidThrough);
 
-    const { isLoading, error, data} = useQuery({//later will check how to get the user from state too
+    const { isLoading, error, data} = useQuery({
         queryKey: [item.userId],
         queryFn: () =>
           newRequest.get(`/users/${item.userId}`)
@@ -51,13 +52,13 @@ const GigCard = ({item, currencyCode}) => {
 
 
   return (
-    <div className='gigCard' style={{border:'none', margin: "20px"}}>
+    <div className='gigCard'>
         <div >  {/*Here I had a lot of headache...since you mapped gigs from grigs component, here you link particular gig with itemid as /gig/item._id  */}
-            <img src={item.cover} alt="" />
+            <img src={item.cover} alt="gig cover image" />
             <div className="info">
               {isLoading ? ("Loading.."
                  ):  error ? (
-                    "Something went wrong!" 
+                    "Something went wrong"
                     ) : (      
 
                          <div className="user">
@@ -95,7 +96,29 @@ const GigCard = ({item, currencyCode}) => {
         </div>
     
     </div>
+   
+
   )
 }
 
 export default GigCard
+
+// <Container className='p-4'>  
+// <Col md="4">  
+
+//   <Card  className='bg-light gigCard'>  
+//   <Card.Img variant="top" src={item.cover} alt="gig cover image" style={{maxHeight: "120px", width: "auto"}}/>  
+//   <Card.Body>  
+//     <Card.Header><Link to={`/gig/${item._id}`} onClick={handleClick} className=' linki'  ><p className=' fs-3 fw-normal' >{item.title}</p></Link>
+//      </Card.Header>  
+//      <Card.Text className="star mb-2">
+//                     <img src="./img/star.png" alt="" style={{width:"14px"}}/>
+//                     <span>{!isNaN(item.totalStars / item.starNumber) && Math.round(item.totalStars / item.starNumber)} ({item.starNumber})</span>
+//                 </Card.Text>  
+//       <Card.Text className='mb-2'>From   {currencyCode} {item.price_basic}</Card.Text> 
+//   </Card.Body>  
+// </Card> 
+// </Col>  
+
+// </Container>  
+

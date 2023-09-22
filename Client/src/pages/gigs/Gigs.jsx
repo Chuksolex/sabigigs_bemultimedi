@@ -181,13 +181,14 @@ const Gigs = () => {
 
           </div>
         </div>
-        <div className='center d-flex'>
-          <h3>Category:</h3>
-          <select class="form-select form-select-lg mb-3 h-6" 
-          value={catFilter}
-          onChange={handleCatChange}
-          name="cat"
-        >
+        <div className='center d-flex align-items-center'>
+          <p className='ms-4 '>Category:</p>
+          <select
+           className="form-select form-select-lg mb-3 h-100 w-auto" 
+           value={catFilter}
+           onChange={handleCatChange}
+           name="cat"
+          >
           <option value="">Search by Category</option>
           <option value="Graphics & Design">Graphics & Design</option>
           <option value="Web Development">Web Development</option>
@@ -223,13 +224,15 @@ const Gigs = () => {
           </div>
 
         
-        <div className="cards">
+        <div >
           {/* {isLoading? "Loading" : error? "Something went wrong!" : data.gigs.map((gig) =>( */} 
            {/* {data.gigs.gigs.length >= 0 ? <p>Loading...</p>: <p>Error loading gigs...</p>} */}
            <div className='row'>
            {sortedData.map((gigg) => (
-            <div key={gigg._id} className='col-sm-12 col-md-6 col-lg-4 col-xl-3'>
-            <GigCard currencyCode={data.currencyCode} item={gigg}/>
+           <div key={gigg._id} className='col-sm-12 col-md-6 col-lg-4 col-xl-3'>
+                        <GigCard key={gigg._id} currencyCode={data.currencyCode} item={gigg}/>
+
+
             </div>
 
           ))}

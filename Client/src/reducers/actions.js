@@ -1,10 +1,10 @@
-import { updateGigsData } from './gigsSlice';
-import newRequest from '../utils/newRequest';
+import { updateGigsData } from './gigsSlice.js';
+import newRequest from '../utils/newRequest.js';
 
 
 
 
-export const fetchAndUpdateGigsData = (search, filters, sort) => async (dispatch) => {
+export const fetchAndUpdateGigsData = () => async (dispatch) => {
   try {
     const response = await newRequest.get(`/gigs`);
     //const gigs = response.data;

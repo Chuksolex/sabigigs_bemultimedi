@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import newRequest from "../../utils/newRequest";
 import "./Success.scss";
+import { useSelector, useDispatch } from "react-redux";
 
 const Success = () => {
   const { search } = useLocation();
@@ -12,6 +13,8 @@ const Success = () => {
   const [error, setError] = useState(null);
   const [confirmed, setConfirmed] =useState(false);
   const [loading, setLoading] = useState(true);
+  const cartItems = useSelector((state) => state.cartSlice.cart); // Replace "cart" with your actual reducer slice name
+
 
 
 

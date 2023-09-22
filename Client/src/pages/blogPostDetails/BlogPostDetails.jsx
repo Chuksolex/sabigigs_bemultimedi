@@ -76,16 +76,16 @@ const BlogPostDetails = ({recommendedServices}) => {
             <p key={index}>{paragraph}</p>
           ))}
         </div>
-      {(currentUser.isSeller ===true) && (
+      {(currentUser?.isSeller ===true) && (
         <div className="blog-post-details__actions">
           <button onClick={ handleEdit}>Edit</button>
           <button onClick={handleDelete}>Delete</button>
         </div>
       )}
       </div>
-      <div className="sidebar-blogdetails">
+      {/* <div className="sidebar-blogdetails">
         <Sidebar recommendedServices={recommendedServices} />
-      </div>
+      </div> */}
       </div>
   );
 };
