@@ -53,7 +53,7 @@ const connect = async () => {
 
   app.use(
     session({
-      secret: `process.env.SESSION_SECRET`, // Add a session secret (can be any string)
+      secret: process.env.SESSION_SECRET, // Add a session secret (can be any string)
       resave: false,
       saveUninitialized: false,
       store: store,
@@ -80,6 +80,7 @@ app.use(cors({
 app.use(express.json());
 app.use(cookieParser());
 bodyParser.json();
+
 
 //Call the connect function to establish the MongoDB connection
 

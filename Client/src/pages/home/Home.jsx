@@ -106,7 +106,6 @@ const Home = () => {
         <h3 className='sub-head'>Customer Testimonials</h3>
         <div className='testimonial-container'>
         <TestimonialSwiper />
-      {/* <Testimonials /> */}
 
         </div>
      
