@@ -125,6 +125,7 @@
 
         @media (max-width: 768px) {  // Adjust the breakpoint as needed
             flex-direction: column-reverse;   // Stack items vertically on mobile
+
             
           }
       
@@ -140,7 +141,8 @@
         flex: 1;
   
         @media (max-width: 768px) {  // Adjust the breakpoint as needed
-          width: 100%;             // Full width on mobile
+          width: 100%; 
+          flex: 2;            // Full width on mobile
           order: 1;                // Reorder items for mobile layout
   
           video {
