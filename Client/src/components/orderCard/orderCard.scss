@@ -1,0 +1,45 @@
+.td-image {
+    /* Styles for the order card */
+    width: 4rem;
+    height: 4rem;
+    border-radius:50%; 
+    margin-right: 2rem;
+}
+
+.view-details{
+    border-radius: 12%;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    border: none;
+    background-color: #2c78ba;
+    color: white;
+    
+}
+
+@media (max-width: 768px) {
+    .td-image {
+        /* Styles for the order card */
+        width: 3rem;
+        height: 3rem;
+        border-radius:50%; 
+        margin-right: 1rem;
+    }
+    
+    .view-details{
+        border-radius: 12%;
+        padding: 0.5rem;
+        border: none;
+        background-color: #2c78ba;
+        
+    }
+    .tx_ref{
+        display: none;
+    }
+}
+ /* color codes 
+#e36b09 orange
+#2c78ba blue
+H000000 black
+#aaaaaa grey1
+#bbbbbb grey2
+#cccccc grey3 */

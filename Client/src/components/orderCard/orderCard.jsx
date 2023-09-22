@@ -1,9 +1,8 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import newRequest from '../../utils/newRequest';
-//import './oderCard.css'; // Import the CSS file
 import { useNavigate } from 'react-router-dom';
-
+import "./orderCard.scss";
 
 const OrderCard = ({ singleOrder }) => {
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
