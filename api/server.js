@@ -59,7 +59,9 @@ const connect = async () => {
       store: store,
     })
   );
-
+  app.use(express.json());
+  app.use(cookieParser());
+  bodyParser.json();
 
 
 
@@ -77,9 +79,7 @@ app.use(cors({
   credentials: true
 }));
 
-app.use(express.json());
-app.use(cookieParser());
-bodyParser.json();
+
 
 
 //Call the connect function to establish the MongoDB connection
