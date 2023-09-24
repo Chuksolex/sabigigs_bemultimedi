@@ -69,7 +69,7 @@ app.use(cors({
 
   app.use(
     session({
-      secret: `process.env.SESSION_SECRET`, // Add a session secret (can be any string)
+      secret: process.env.SESSION_SECRET, // Add a session secret (can be any string)
       resave: false,
       saveUninitialized: false,
       store: store,
@@ -80,7 +80,8 @@ app.use(cors({
 
   app.use(express.json());
   app.use(cookieParser());
-  bodyParser.json();
+  //bodyParser.json();
+  app.use(bodyParser.json());
 
 
 
