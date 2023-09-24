@@ -25,7 +25,7 @@ function Login() {
         localStorage.setItem("currentUser", JSON.stringify(res.data));
         // Redirect back to the intended gig page after successful login
         const intendedOrder = localStorage.getItem('intendedOrder');
-        const wantedGigInfo = localStorage.getItem("wantedGigInfo");
+        const wantedGigInfo = JSON.parse(localStorage.getItem("wantedGigInfo"));
         setLoading(false);  
         wantedGigInfo? navigate(`/gig/${wantedGigInfo._id}`) : intendedOrder? navigate('/mycart'): navigate("/");
         localStorage.removeItem('intendedOrder');

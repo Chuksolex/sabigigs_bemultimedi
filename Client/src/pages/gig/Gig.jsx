@@ -112,6 +112,41 @@ function Gig () {
       }),
   });
 
+  const handleContact = async ()=>{
+    if (!currentUser) {
+      localStorage.setItem("wantedGigInfo", JSON.stringify(gigAlone));
+
+      toast.info('Please Login to contact seller', {
+        position: toast.POSITION.TOP_RIGHT // Customize the position of the toast
+      });
+
+      setTimeout(() => {
+       navigate("/login");
+       
+      }, 2000);
+    }else{
+      try {
+         
+        // Create a new conversation
+        const response = await newRequest.post("/conversations", {
+          to: sellerId,
+                       
+          fromEmail: currentUser.email,
+        }); 
+        const newConversationId = await response.data._id; // Assuming your response contains the new conversation's ID
+  
+        // Redirect the user to the new conversation page
+        navigate(`/message/${newConversationId}`);
+      } catch (error) {
+        // Handle any errors that may occur during the process
+        console.error('Error initiating conversation:', error);
+      }
+    }
+  }
+  
+  
+
+
 
   const handleConversationCreated = async () => {
     if (existingConversationId) {
@@ -266,9 +301,7 @@ function Gig () {
                    <span>{Math.round(gigAlone.totalStars / gigAlone.starNumber)}</span>
 
                  </div> )}
-                 <button onClick={() => setShowCreateConversationModal(true)}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
-                    <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
-                  </svg>Contact Seller</button>
+                 <button className='btn btn-primary' onClick={() => handleContact()}>Contact Seller</button>
                   {showCreateConversationModal && (
                                     <CreateConversation 
                                         onConversationCreated={handleConversationCreated} 
@@ -363,23 +396,21 @@ function Gig () {
        
        
 
-        <div className='browsing-history container'>
+        <div className='browsing-history '>
           <h2 className='sub-head'>Your Browsing History</h2>
-          <div  className='row text-center' >
+          <div  className='history' >
 
           {browsingHistory.map((gighistory) => (
-              <div key={gighistory._id} className='col-sm-12 col-md-4 col-lg-4 col-xl-3'>
-                 <BrowsingHistoryCard  item={gighistory} />
-               </div>
+                 <GigCard  item={gighistory}  key={gighistory._id}/>
           )
           )}
        
        </div>
         </div>  
 
-       <div>
+     
           <Reviews gigId={gigId} />
-       </div>
+      
        
 
        

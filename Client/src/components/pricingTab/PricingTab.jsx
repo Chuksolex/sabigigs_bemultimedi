@@ -75,17 +75,17 @@ const PricingTab = ({ item, currencyCode, currentUser }) => {
 
     const handleContactSeller = async () => {
       if (!currentUser) {
-        localStorage.setItem("wantedGigInfo", item);        
+        localStorage.setItem("wantedGigInfo", JSON.stringify(item));        
   
         toast.info('To send a message you need to log in first! You will be redirected to the login page in 2 secs..', {
           position: toast.POSITION.TOP_CENTER,
-          autoClose: 9000, // 2 seconds
+          autoClose: 3000, // 2 seconds
         });
   
          // Redirect after a delay
        setTimeout(() => {
           navigate("/login"); // Replace with your login page route
-        }, 9100); // 1 second
+        }, 300); // 1 second
         
         return;
       }else {    

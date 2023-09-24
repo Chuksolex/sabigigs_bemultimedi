@@ -172,9 +172,9 @@ const BlogList = ({ recommendedServices }) => {
           </div>
         ))}
       </div>
-      <div className="sidebar">
+      {/* <div className="sidebar">
         <Sidebar recommendedServices={recommendedServices} />
-      </div>
+      </div> */}
     </div>
   );
 };

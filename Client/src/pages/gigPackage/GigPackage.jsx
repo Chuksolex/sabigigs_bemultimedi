@@ -21,7 +21,7 @@ const GigPackage = () => {
    const [totalPrice, setTotalPrice] = useState(selectedGig.price);
    const [totalAddonsPrice, setTotalAddonsPrice] = useState(0);
    const navigate = useNavigate();
-   const currentUser = localStorage.getItem("currentUser");
+   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
    console.log("Current user at gigPackage:", currentUser);
    const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);

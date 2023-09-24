@@ -65,7 +65,8 @@ const Review = ({review}) => {
                <span>Yes</span>
                <img src="/img/dislike.png" alt="" />
                <span>No</span>
-             </div>                
+             </div>  
+             <hr/>              
            </div> 
            
           )

@@ -106,3 +106,9 @@ VSCODE SHORTCUTS
  IMPORTANT
  1. If I want to make it a full freelancing site, then add to carts will not be implemented the way I did. for simplicity one order can have addons, quantity, but it should be traceble to only one seller.
  2. No 1 means that the order will have to be per seller.
+
+ col-8 col-md-8 mb-4 m_top2 chk-sty mx-wdt w-100 h-100 Cardclass
+
+ modal show col-md-4 m_bot2 m_top2 mx-wdt
+
+ the down row: d-flex justify-content-center my-4 mx-wdt

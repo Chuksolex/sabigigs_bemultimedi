@@ -91,13 +91,8 @@
                 }
                 }
                 button {
-                    background-color: #2c78ba ;
-                    border-radius: 5px;                   
-                    border: 0.5px solid gray;
-                    padding: 5px; cursor: pointer;
-                    color: white;
-
-                    svg{margin-right: 10px;}
+                   
+                    width: auto;
 
                     
                   }
@@ -109,7 +104,7 @@
             }
             .box{
                 border: .5px solid gray;
-                border-radius: 10px; margin-top: 20px; padding: 20px; 
+                border-radius: 10px; margin-top: 20px; padding: 20px; margin: auto;
 
                 .items{
                     display: flex; flex-wrap: wrap;
@@ -272,7 +267,7 @@
     
                 .user{
                     gap: 5px;
-                    display: flex; justify-content: flex-start !important; align-items: flex-start !important;
+                    display: flex; justify-content: center; align-items: center;
                     .title{
                         text-align: center !important;
                     }
@@ -335,13 +330,8 @@
                               span{ font-size: 14px; font-weight: bold; color:#e36b09;
                     }
                     }
-                    button {
-                        background-color: #2c78ba ;
-                        border-radius: 5px;
-                        border: 1px solid gray;
-                        padding: 10px; cursor: pointer;
-                        color: white;
-    
+                    button {                    
+                        color: white;  
                         
                       }
                 
@@ -352,7 +342,7 @@
                 }
                 .box{
                     border: .5px solid gray;;
-                    border-radius: 10px; margin-top: 20px; margin:0 auto; 
+                    border-radius: 10px; margin-top: 20px; margin:auto; width: 300px; align-self: center;
     
                     .items{
                         display: flex; flex-wrap: wrap;
@@ -389,13 +379,15 @@
             align-items: center;
            margin: 0 auto;
            width: 100%;
+           padding: 0px 20px;
            
            
     
             .pricingTab{
+                width: 100%;
                 h2{
                     font-weight: 500;
-                    width: 80%;
+                    width: auto;
                   
                 }
             
@@ -406,7 +398,7 @@
                 margin-top: 20px;
                 padding: 20px auto;
                 justify-content: center;
-                width: 80%;
+                width: 100%;
     
                 h3{
                     font-weight: 500;
@@ -460,6 +452,7 @@
             gap: 20px;
             flex-wrap: wrap;
         }
+       
       
       }
     } 

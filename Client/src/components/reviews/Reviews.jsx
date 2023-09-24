@@ -38,19 +38,20 @@ const Reviews = ({gigId}) => {
   
   return (
     <div className="reviews">
-      <h2>Reviews</h2>
     
         {isLoading? ("Loading.."
                  ) : error ? ("Error loading reviews"
                   ) : (
                        data.map((review) => <Review key={review._id} review={review} />)
             )}
-
+           <hr />
         <div className='add'>
-          <hr />
+        
         <h3>Add a review.</h3>
         <form action="" className='addForm' onSubmit={handleSubmit}>
           <input type="text" placeholder="How do you rate this gig?"/>
+          <div className='selectandbutton'>
+            
           <select name="" id="">
             <option value={1}>1</option>
             <option value={2}>2</option>
@@ -59,6 +60,8 @@ const Reviews = ({gigId}) => {
             <option value={5}>5</option>
           </select>
           <button type='submit'>Send</button>
+
+          </div>
         </form>
         </div>
       <hr />
