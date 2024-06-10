@@ -53,7 +53,8 @@ export const getGig = async (req, res, next) => {
     }
 
     // Fetch the user's selected currency from their session
-    const selectedCurrency = req.session.selectedCurrency ||  'USD';
+    //const selectedCurrency = req.session.selectedCurrency ||  'USD';
+    const selectedCurrency = req.params.selectedCurrency || 'USD';
 
     // Convert gig prices to the selected currency using your currency conversion function or library
     const convertedPrice_basic = convertCurrency(gig.price_basic, 'USD', selectedCurrency).toFixed(2);
@@ -107,8 +108,9 @@ export const getGigs = async (req,res,next) => {
 
             // Fetch the user's selected currency from their session
 
-            const selectedCurrency = req.session.selectedCurrency || 'USD';
-            console.log(selectedCurrency);
+            //const selectedCurrency = req.session.selectedCurrency || 'USD';
+          const selectedCurrency = q.currency || 'USD';
+            console.log("selected currency at backend", selectedCurrency);
             // Call the getExchangeRates function to fetch the exchange rates
            // const exchangeRates = await getExchangeRates();
          
