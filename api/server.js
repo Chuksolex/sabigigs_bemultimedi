@@ -69,9 +69,9 @@ app.use(cors({
 
   app.use(
     session({
-      secret: process.env.SESSION_SECRET, // Add a session secret (can be any string)
+      secret: `dienekm9ekododkd`, // Add a session secret (can be any string)
       resave: false,
-      saveUninitialized: false,
+      saveUninitialized: true,
       store: store,
     })
   );
