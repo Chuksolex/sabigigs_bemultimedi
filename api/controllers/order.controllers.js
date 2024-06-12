@@ -25,7 +25,7 @@ const transactionRef = generateTransactionRef();
  try {
     const { cartItems, totalQuantity, overallTotalPrice, currentUser } = req.body;
     console.log("req.body at intent:",  req.body);
-    const selectedCurrency = req.session.selectedCurrency || 'USD';
+    const selectedCurrency = req.body.selectedCurrency || 'USD';
     const sellerId = "6492dd33b70f233a6b0425ff";
     const seller = await User.findById(sellerId);
 
