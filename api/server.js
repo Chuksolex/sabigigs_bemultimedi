@@ -46,7 +46,20 @@ const connect = async () => {
 };
   // Middleware to enable session
 
-  
+  app.use(cors({
+  origin: function (origin, callback) {
+    const allowedOrigins = ['www.prettygigs.com.ng', 'https://prettygigs.vercel.app', 'https://phaxnetgig.onrender.com', 'http://localhost:5173'];
+    if (allowedOrigins.includes(origin) || !origin) {
+      callback(null, true);
+    } else {
+            console.log(`Blocked by CORS: ${origin}`); // Debugging log
+
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
+}));
+
   
   const store = new MongoDBStoreSession({
     uri: process.env.MONGO,
@@ -54,17 +67,6 @@ const connect = async () => {
   });
 
   //app.use(cors({origin:"http://localhost:5173", credentials:true} ));
-app.use(cors({
-  origin: function (origin, callback) {
-    const allowedOrigins = ['www.prettygigs.com.ng', 'https://prettygigs.vercel.app', 'https://phaxnetgig.onrender.com', 'http://localhost:5173'];
-    if (allowedOrigins.includes(origin) || !origin) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true
-}));
 
 
   app.use(
