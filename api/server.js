@@ -48,7 +48,7 @@ const connect = async () => {
 
   app.use(cors({
   origin: function (origin, callback) {
-    const allowedOrigins = ['www.prettygigs.com.ng', 'https://prettygigs.vercel.app', 'https://phaxnetgig.onrender.com', 'http://localhost:5173'];
+    const allowedOrigins = ['www.prettygigs.com.ng', 'https://www.prettygigs.com.ng', 'https://prettygigs.vercel.app', 'https://phaxnetgig.onrender.com', 'http://localhost:5173'];
     if (allowedOrigins.includes(origin) || !origin) {
       callback(null, true);
     } else {
