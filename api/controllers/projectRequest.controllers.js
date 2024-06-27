@@ -12,6 +12,7 @@ try {
       phone,
       projectDescription,
       startDate,
+      currency,
       budget
     } = req.body;
 
@@ -21,11 +22,12 @@ try {
       phone,
       projectDescription,
       startDate,
+      currency,
       budget
     });
   const recipientEmail= "chuks4flourish@gmail.com";
   const subject = "Project Request";
-  const message = `User details:  (${name} ${email} ${phone}). Message: (${projectDescription}). Poposed start date: (${startDate}). Budget: (${budget).`
+  const message = `User details:  (${name} ${email} ${phone}). Message: (${projectDescription}). Poposed start date: (${startDate}). Budget: (${currency} ${budget).`
   
     await projectRequest.save();
 
