@@ -7,6 +7,7 @@ const projectRequestSchema = new Schema({
   phone: { type: String, required: true },
   projectDescription: { type: String, required: true },
   startDate: { type: Date, required: false },
-  budget: { type: Number, required: false }
+  budget: { type: Number, required: false },
+   currency: { type: String, required: true } 
 });
 export default mongoose.model("ProjectRequest", projectRequestSchema)
