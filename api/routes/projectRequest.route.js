@@ -5,6 +5,6 @@ import {createProjectRequest } from "../controllers/projectRequest.controllers.j
 
 const projectRequestRoute = express.Router();
 
-authRoute.post("/projectRequest", createProjectRequest};
+projectRequestRoute.post("/projectRequest", createProjectRequest};
 
 export default projectRequestRoute;
