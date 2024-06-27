@@ -21,6 +21,7 @@ import bodyParser from "body-parser";
 import blogPostRoute from "./routes/blogPost.route.js";
 import generateSessionId from "./routes/generateSessionId.route.js";
 import trackGigClickRoute from "./routes/trackGigClick.route.js";
+import projectRequestRoute from "./routes/projectRequest.route.js";
 //import currencyRoute from "./routes/currency.route.js";
 
 
@@ -105,6 +106,7 @@ app.use("/api/recommendations", recommendationRoute);
 app.use("/api/blog", blogPostRoute);
 app.use("/api/generatesessionid", generateSessionId);
 app.use("/api/tackgigclick", trackGigClickRoute);
+app.use("/api/projectRequest", projectRequestRoute);
 // app.use("/api/currency", currencyRoute);
 
 
