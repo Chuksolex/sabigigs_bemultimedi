@@ -1,11 +1,11 @@
-import express from "express"
-import ProjectRequest from "../models/projectRequest.model.js";
-import createError from "../utils/createError.js";
-import sendNotificationEmail from "../utils/sendNotificationEmail.js";
+// controllers/projectRequestController.js
 
+import ProjectRequest from "../models/projectRequest.model.js";
+import sendNotificationEmail from "../utils/sendNotificationEmail.js";
+import createError from "../utils/createError.js";
 
 export const createProjectRequest = async (req, res, next) => {
-try {
+  try {
     const {
       name,
       email,
@@ -16,6 +16,7 @@ try {
       budget
     } = req.body;
 
+    // Create a new project request instance
     const projectRequest = new ProjectRequest({
       name,
       email,
@@ -25,22 +26,21 @@ try {
       currency,
       budget
     });
-  const recipientEmail= "chuks4flourish@gmail.com";
-  const subject = "Project Request";
-  const message = `User details:  (${name} ${email} ${phone}). Message: (${projectDescription}). Poposed start date: (${startDate}). Budget: (${currency} ${budget).`
-  
+
+    // Save the project request to the database
     await projectRequest.save();
 
+    // Send notification email about the new project request
+    const recipientEmail = "chuks4flourish@gmail.com";
+    const subject = "Project Request";
+    const message = `User details: ${name}, ${email}, ${phone}. Message: ${projectDescription}. Proposed start date: ${startDate}. Budget: ${currency} ${budget}.`;
 
-    // Send password reset email
-    sendNotificationEmail(recipientEmail, subject, message);
+    await sendNotificationEmail(recipientEmail, subject, message);
 
-    res.status(200).json('Got new project reequest from Prettygigs contact form.');
+    // Respond with a success message
+    res.status(200).json({ message: 'New project request received successfully.' });
   } catch (error) {
+    // Pass the error to the error handling middleware
     next(error);
-    console.log(error)
   }
 };
-
-
-
