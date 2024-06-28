@@ -10,7 +10,7 @@ import dotenv from "dotenv";
 
 //send mail
 const mailOptions = {
-    from: `phaxnetgigs  <chukwumaoleka@outlook.com>`,
+    from: `prettygigs  <chuks4flourish@gmail.com>`,
       to: newUser.email, 
       subject: "Account Verification",
       
