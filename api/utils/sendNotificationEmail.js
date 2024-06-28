@@ -3,16 +3,12 @@ import createMailTransporter  from "./createMailTransporter.js";
  const sendNotificationEmail = async (recipientEmail, subject, message) => {
     const transporter = await createMailTransporter();
 
-
-
-
-//send mail
+  // Configure the mailoptions object
 const mailOptions = {
-    from: `phaxnetgigs  <chukwumaoleka@outlook.com>`,
-      to: recipientEmail, 
-      subject: subject,
-      
-      text: message,
+  from: `prettygigs  <chuks4flourish@gmail.com>`
+  to: recipientEmail,
+  subject: subject,
+  text: message,
 };
 
 
@@ -24,4 +20,6 @@ const mailOptions = {
     }
 });
 }
-export default sendNotificationEmail
+export default sendNotificationEmail;
+
+
