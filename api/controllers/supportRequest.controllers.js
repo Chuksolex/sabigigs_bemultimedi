@@ -7,9 +7,10 @@ const createSupportRequest = async (req, res) => {
     const { title, description, attachmentUrl, user } = req.body;
     const person = await User.findById(user);
 
-    if(!person){
-      res.send("No user with your details on our data base");
+    if (!person) {
+      return res.status(404).send("No user with your details on our database");
     }
+
     const newSupportRequest = new SupportRequest({
       title,
       description,
@@ -18,15 +19,23 @@ const createSupportRequest = async (req, res) => {
     });
 
     await newSupportRequest.save();
-    
 
-    await sendNotificationEmail(recipientEmail:"chuks4flourish@gmail.com", subject: "Support Request", message: description);
-        await sendNotificationEmail(recipientEmail: `${person.email}`, subject: "We Got Your Support Request", message: `Dear ${person.name}, we have received your request and shall respond in the earliest possible time.`);
+    await sendNotificationEmail({
+      recipientEmail: "chuks4flourish@gmail.com",
+      subject: "Support Request",
+      message: description,
+    });
 
+    await sendNotificationEmail({
+      recipientEmail: person.email,
+      subject: "We Got Your Support Request",
+      message: `Dear ${person.name}, we have received your request and shall respond in the earliest possible time.`,
+    });
 
     res.status(200).json({ message: 'Support request submitted successfully' });
   } catch (error) {
     res.status(500).json({ error: 'Failed to submit support request' });
   }
 };
+
 export default createSupportRequest;
