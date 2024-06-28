@@ -33,7 +33,7 @@ export const createProjectRequest = async (req, res, next) => {
     // Send notification email about the new project request
     const recipientEmail = "chuks4flourish@gmail.com";
     const subject = "Project Request";
-    const message = `User details: ${name}, ${email}, ${phone}. Message: ${projectDescription}. Proposed start date: ${startDate}. Budget: ${currency} ${budget}.`;
+    const message = `User details: name- ${name}, email- ${email}, from- ${phone.country.name} ${phone.formattedValue}. Message: ${projectDescription}. Proposed start date: ${startDate}. Budget: ${currency} ${budget}.`;
 
     await sendNotificationEmail(recipientEmail, subject, message);
 
