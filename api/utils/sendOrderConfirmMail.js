@@ -21,7 +21,7 @@ const mailOptionsBuyer = {
     };
 
     const mailOptionsSeller = {
-        from: ``prettygigs  <chuks4flourish@gmail.com>``,
+        from: `prettygigs  <chuks4flourish@gmail.com>`,
           to: seller.email, 
           subject: "New Order",
           
