@@ -5,10 +5,15 @@ import User from "../models/user.model.js";
 const createSupportRequest = async (req, res) => {
   try {
     const { title, description, attachmentUrl, user } = req.body;
+
+    if (!user) {
+      return res.status(400).json({ error: "User ID is required" });
+    }
+
     const person = await User.findById(user);
 
     if (!person) {
-      return res.status(404).send("No user with your details on our database");
+      return res.status(404).json({ error: "No user with your details in our database" });
     }
 
     const newSupportRequest = new SupportRequest({
@@ -20,17 +25,17 @@ const createSupportRequest = async (req, res) => {
 
     await newSupportRequest.save();
 
-    await sendNotificationEmail({
-      recipientEmail: "chuks4flourish@gmail.com",
-      subject: "Support Request",
-      message: description,
-    });
+    await sendNotificationEmail(
+      "chuks4flourish@gmail.com",
+      "Support Request",
+      description
+    );
 
-    await sendNotificationEmail({
-      recipientEmail: person.email,
-      subject: "We Got Your Support Request",
-      message: `Dear ${person.name}, we have received your request and shall respond in the earliest possible time.`,
-    });
+    await sendNotificationEmail(
+      person.email,
+      "We Got Your Support Request",
+      `Dear ${person.name}, we have received your request and shall respond in the earliest possible time.`
+    );
 
     res.status(200).json({ message: 'Support request submitted successfully' });
   } catch (error) {
