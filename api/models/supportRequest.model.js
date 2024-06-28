@@ -7,4 +7,5 @@ const SupportRequestSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now },
 });
 
-module.exports = mongoose.model('SupportRequest', SupportRequestSchema);
+export default mongoose.model("SupportRequest", SupportRequestSchema)
+
