@@ -28,7 +28,7 @@ export const createProjectRequest = async (req, res, next) => {
     });
 
     // Save the project request to the database
-    await projectRequest.save();
+    await ProjectRequest.save();
 
     // Send notification email about the new project request
     const recipientEmail = "chuks4flourish@gmail.com";
