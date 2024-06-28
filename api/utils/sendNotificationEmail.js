@@ -5,10 +5,10 @@ import createMailTransporter  from "./createMailTransporter.js";
 
   // Configure the mailoptions object
 const mailOptions = {
-  from: `prettygigs  <chuks4flourish@gmail.com>`
-  to: `${recipientEmail}`,
-  subject: `${subject}`,
-  text: `${message}`,
+  from: `prettygigs  <chuks4flourish@gmail.com>`,
+  to: recipientEmail,
+  subject: subject,
+  text: message,
 };
 
 
