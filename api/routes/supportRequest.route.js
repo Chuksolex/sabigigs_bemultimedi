@@ -1,5 +1,5 @@
 import express from "express";
-import {createSupportRequest} from "../controllers/supportRequest.controllers.js";
+import createSupportRequest from "../controllers/supportRequest.controllers.js";
 
 
 
