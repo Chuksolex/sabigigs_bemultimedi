@@ -1,5 +1,3 @@
-// controllers/projectRequestController.js
-
 import ProjectRequest from "../models/projectRequest.model.js";
 import sendNotificationEmail from "../utils/sendNotificationEmail.js";
 import createError from "../utils/createError.js";
@@ -28,7 +26,7 @@ export const createProjectRequest = async (req, res, next) => {
     });
 
     // Save the project request to the database
-    await ProjectRequest.save();
+    await projectRequest.save();
 
     // Send notification email about the new project request
     const recipientEmail = "chuks4flourish@gmail.com";
