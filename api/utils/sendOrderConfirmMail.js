@@ -9,7 +9,7 @@ import createMailTransporter  from "./createMailTransporter.js";
 
 //send mail
 const mailOptionsBuyer = {
-    from: `phaxnetgigs  <chukwumaoleka@outlook.com>`,
+    from: `prettygigs  <chuks4flourish@gmail.com>`,
       to: buyer.email, 
       subject: "New Order Processing",
       
@@ -21,7 +21,7 @@ const mailOptionsBuyer = {
     };
 
     const mailOptionsSeller = {
-        from: `phaxnetgigs  <chukwumaoleka@outlook.com>`,
+        from: ``prettygigs  <chuks4flourish@gmail.com>``,
           to: seller.email, 
           subject: "New Order",
           
@@ -50,3 +50,4 @@ const mailOptionsBuyer = {
 };
 
 export default sendOrderConfirmMail;
+
