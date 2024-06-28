@@ -16,3 +16,4 @@ const createMailTransporter = async () => {
 
   return transporter;
 };
+export default createMailTransporter
