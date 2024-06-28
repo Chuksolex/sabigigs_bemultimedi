@@ -3,14 +3,13 @@ import createMailTransporter  from "./createMailTransporter.js";
 
  const sendPasswordResetEmail = async (email, resetToken) => {
     const transporter = await createMailTransporter();
-   // const paswordresetUrl = `${process.env.EMAIL_VERIFICATION_URL_CLIENT}/reset-password/${resetToken}`;
 
 
 
 
 //send mail
 const mailOptions = {
-    from: `phaxnetgigs  <chukwumaoleka@outlook.com>`,
+    from: `prettygigs  <chuks4flourish@gmail.com>`,
       to: email, 
       subject: "Password Reset",
       
