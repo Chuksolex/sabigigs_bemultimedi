@@ -5,7 +5,7 @@ import User from "../models/user.model.js";
 const createSupportRequest = async (req, res) => {
   try {
     const { title, description, attachmentUrl, user } = req.body;
-
+    console.log("upload url: ", attachmentUrl);
     if (!user) {
       return res.status(400).json({ error: "User ID is required" });
     }
