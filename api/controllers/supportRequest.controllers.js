@@ -24,13 +24,13 @@ const createSupportRequest = async (req, res) => {
     });
 
     await newSupportRequest.save();
-    const message = "The User with name and/or email : " + person.name && person.email + " wrote " + description + "Evidence link: " + attachmentUrl;
+    const message = "The User with name and/or email : " + person.username + person.email + " wrote " + description + "Evidence link: " + attachmentUrl;
     await sendNotificationEmail(
       "chuks4flourish@gmail.com",
       "Support Request",
       message
     );
-     const messageDUser = "Dear " + person.name + ", we got your support request and will respond to it in the earliest possible time.";
+     const messageDUser = "Dear " + person.username + ", we got your support request and will respond to it in the earliest possible time.";
     
     await sendNotificationEmail(
       person.email,
