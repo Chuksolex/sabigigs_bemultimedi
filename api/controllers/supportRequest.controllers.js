@@ -15,7 +15,7 @@ const createSupportRequest = async (req, res) => {
     if (!person) {
       return res.status(404).json({ error: "No user with your details in our database" });
     }
-
+    
     const newSupportRequest = new SupportRequest({
       title,
       description,
@@ -24,17 +24,18 @@ const createSupportRequest = async (req, res) => {
     });
 
     await newSupportRequest.save();
-
+    const message = description + "Evidence link: " + attachmentUrl;
     await sendNotificationEmail(
       "chuks4flourish@gmail.com",
       "Support Request",
-      description
+      message
     );
-
+     const messageDUser = "Dear " + person.name + ", we got your support request and will respond to it in the earliest possible time.";
+    
     await sendNotificationEmail(
       person.email,
       "We Got Your Support Request",
-      `Dear ${person.name}, we have received your request and shall respond in the earliest possible time.`
+      messageDUser
     );
 
     res.status(200).json({ message: 'Support request submitted successfully' });
