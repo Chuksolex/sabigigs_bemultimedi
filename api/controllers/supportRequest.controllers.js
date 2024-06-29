@@ -39,7 +39,17 @@ const createSupportRequest = async (req, res) => {
 
     res.status(200).json({ message: 'Support request submitted successfully' });
   } catch (error) {
-    res.status(500).json({ error: 'Failed to submit support request' });
+     console.error('Error in createSupportRequest:', error); // Log the error details
+    let errorMessage = 'Failed to submit support request';
+    if (error.message.includes('SMTP')) {
+      errorMessage = 'Error sending notification email';
+    } else if (error.message.includes('validation failed')) {
+      errorMessage = 'Validation error: ' + error.message + 'logout and login then try again';
+    } else if (error.message.includes('Network')) {
+      errorMessage = 'Network error: Please check your connection';
+    }
+    res.status(500).json({ error: errorMessage });
+  }
   }
 };
 
