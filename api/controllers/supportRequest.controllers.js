@@ -24,7 +24,7 @@ const createSupportRequest = async (req, res) => {
     });
 
     await newSupportRequest.save();
-    const message = "User with name and email : " + person.name, person.email + "wrote " + description + "Evidence link: " + attachmentUrl;
+    const message = "User with name and email : " + person.name && person.email + "wrote " + description + "Evidence link: " + attachmentUrl;
     await sendNotificationEmail(
       "chuks4flourish@gmail.com",
       "Support Request",
