@@ -50,7 +50,7 @@ const createSupportRequest = async (req, res) => {
     }
     res.status(500).json({ error: errorMessage });
   }
-  }
+  
 };
 
 export default createSupportRequest;
