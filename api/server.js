@@ -63,22 +63,22 @@ const connect = async () => {
 }));
 
   
-  const store = new MongoDBStoreSession({
-    uri: process.env.MONGO,
-    collection: 'sessions', // Optional: Specify the collection name for storing sessions
-  });
+  // const store = new MongoDBStoreSession({
+  //   uri: process.env.MONGO,
+  //   collection: 'sessions', // Optional: Specify the collection name for storing sessions
+  // });
 
   //app.use(cors({origin:"http://localhost:5173", credentials:true} ));
 
 
-  app.use(
-    session({
-      secret: `dienekm9ekododkd`, // Add a session secret (can be any string)
-      resave: false,
-      saveUninitialized: true,
-      store: store,
-    })
-  );
+  // app.use(
+  //   session({
+  //     secret: `dienekm9ekododkd`, // Add a session secret (can be any string)
+  //     resave: false,
+  //     saveUninitialized: true,
+  //     store: store,
+  //   })
+  // );
 
 
 
