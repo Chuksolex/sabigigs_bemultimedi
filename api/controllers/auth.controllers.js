@@ -92,7 +92,7 @@ export const verifyEmail = async (req, res, next) => {
 //           if(!user) return next(createError(404, "User not found"));
 
 //           if (!user.isVerified) {
-//             return next(createError(403, "Email not verified. Please check your email for verification."));
+//             return next(createError(403, "Email not verified. Please check your email for the verification link. If you can't find it contact support."));
 //           }
 
 //           const isCorrect = bcrypt.compareSync(req.body.password, user.password);
