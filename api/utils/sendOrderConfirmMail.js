@@ -27,8 +27,8 @@ const mailOptionsBuyer = {
           
           html: `<p> Hello ${seller.username}, you have received an order from ${buyer.username}</p>
            
-           <p> Login to see order details: <a href=`${process.env.CLIENTLINK}`>Login</a>
-           </p>`,
+          <p> Login to see order details: <a href="${process.env.CLIENTLINK}">Login</a></p>
+,
     
         };
 
