@@ -15,7 +15,7 @@ const mailOptions = {
       subject: "Account Verification",
       
       html: `<p> Hello ${newUser.username}, verify your email by clicking on this link:
-      ${verificationUrl} </p>`,
+     <a>${verificationUrl}</a></p>`,
 
     };
 
