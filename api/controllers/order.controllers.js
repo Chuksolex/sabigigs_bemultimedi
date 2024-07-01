@@ -81,7 +81,7 @@ const transactionRef = generateTransactionRef();
       tx_ref: tx_ref,
       amount: overallTotalPrice,
       currency: selectedCurrency, // Set the appropriate currency code
-      redirect_url: 'https://phaxnetgig.onrender.com/success', // Redirect URL after payment completion
+      redirect_url: 'https://www.prettygigs.com.ng/success', // Redirect URL after payment completion
       customer: {
       email: currentUser.email, // Set the customer email dynamically
       phonenumber: currentUser.phone,
