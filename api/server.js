@@ -1,9 +1,9 @@
 import express from "express";
 import dotenv from "dotenv";
-import session from 'express-session';
-import MongoDBStore from 'connect-mongodb-session';
+//import session from 'express-session';
+//import MongoDBStore from 'connect-mongodb-session';
 import mongoose from "mongoose";
-const MongoDBStoreSession = MongoDBStore(session);
+//const MongoDBStoreSession = MongoDBStore(session);
 
 import userRoute from "./routes/user.route.js";
 import gigRoute from "./routes/gig.route.js";
