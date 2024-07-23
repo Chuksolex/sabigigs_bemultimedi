@@ -1,5 +1,5 @@
 import express from "express";
-import livetutorRegisterController from "../controllers/livetutorRegister.controllers.js";
+import livetutorRegisterController from "../controllers/livetutorRegister.controller.js";
 
 
 
