@@ -5,6 +5,6 @@ import livetutorRegisterController from "../controllers/livetutorRegister.contro
 
 const livetutorRegisterRoute = express.Router();
 
-authRoute.post("/", livetutorRegisterController);
+livetutorRegisterRoute.post("/", livetutorRegisterController);
 
 export default livetutorRegisterRoute;
