@@ -23,7 +23,7 @@ import generateSessionId from "./routes/generateSessionId.route.js";
 import trackGigClickRoute from "./routes/trackGigClick.route.js";
 import projectRequestRoute from "./routes/projectRequest.route.js";
 import supportRequestRoute from "./routes/supportRequest.route.js";
-import livetutorRegisterRoute from "./routes/livetutorRegister.route.js";
+import livetutorRegisterRoute from "./routes/livetutorRegisterRoute.route.js";
 
 //import currencyRoute from "./routes/currency.route.js";
 
